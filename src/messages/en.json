@@ -1,0 +1,150 @@
+{
+  "nav": {
+    "logo": "Luxe Beauty",
+    "services": "Our Expertise",
+    "gallery": "The Portfolio",
+    "contact": "Concierge & Inquiry",
+    "faq": "FAQ",
+    "bookBtn": "Book Your Experience"
+  },
+  "hero": {
+    "badge": "An Invitation to Refinement",
+    "title1": "Experience the Art of",
+    "titleItalic": "Refined Beauty",
+    "title2": "Crafted for You",
+    "description": "Our atelier of beauty specialists and curated luxury products deliver rituals designed exclusively for you — where elegance meets transformation.",
+    "stat1Num": "12+",
+    "stat1Label": "Years of Mastery",
+    "stat2Num": "3K+",
+    "stat2Label": "Cherished Clients",
+    "stat3Num": "98%",
+    "stat3Label": "Satisfaction",
+    "ctaPrimary": "Reserve Your Session",
+    "ctaSecondary": "Call the Studio",
+    "placeholderTitle": "The Atelier",
+    "placeholderSub": "A glimpse of our sanctuary",
+    "badgePreferred": "Most Sought-After",
+    "badgeReviews": "5.0 / 324 Reviews",
+    "badgeSlotLabel": "Next Available",
+    "badgeSlotValue": "This Week"
+  },
+  "services": {
+    "eyebrow": "Our Mastery",
+    "title": "Signature",
+    "titleItalic": "Treatments",
+    "badgePopular": "Signature",
+    "badgeNew": "New",
+    "cta": "Discover More",
+    "items": [
+      {
+        "id": "protez-tirnak",
+        "title": "Couture Nail Art",
+        "description": "Elevate your hands with our bespoke nail extensions, crafted using the finest materials and avant-garde techniques by our master nail artists.",
+        "badge": "Signature"
+      },
+      {
+        "id": "cilt-bakimi",
+        "title": "Luminous Skin Ritual",
+        "description": "Restore your skin's natural brilliance through our deeply restorative cleansing, hydration and age-defying treatments — each protocol tailored to your unique skin.",
+        "badge": "New"
+      },
+      {
+        "id": "kalici-makyaj",
+        "title": "Permanent Artistry",
+        "description": "Wake up flawless every morning with our precision microblading, ombré brow sculpting and lip contouring. Results that endure 1–3 years.",
+        "badge": null
+      }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "A Curated Collection",
+    "title": "The Portfolio of Elegance",
+    "items": [
+      { "label": "Couture Nails" },
+      { "label": "Skin Luminosity" },
+      { "label": "Brow Architecture" },
+      { "label": "Permanent Artistry" }
+    ]
+  },
+  "beforeAfter": {
+    "eyebrow": "Witness the Difference",
+    "title": "Remarkable",
+    "titleItalic": "Transformations",
+    "subtitle": "Authentic results achieved by our specialists — every portrait tells a story of renewal",
+    "beforeLabel": "Before",
+    "afterLabel": "After",
+    "beforeNote": "Prior to treatment",
+    "afterNote": "Following treatment",
+    "disclaimer": "All imagery features our genuine clients — unretouched and unfiltered."
+  },
+  "footer": {
+    "tagline": "Where artistry meets elegance. Our specialists are devoted to unveiling the most refined version of you.",
+    "contactTitle": "Concierge & Address",
+    "address": "Bağcılar District, Beauty Street No:12\nŞişli / Istanbul",
+    "hoursTitle": "Studio Hours",
+    "hours": [
+      { "day": "Monday – Friday", "time": "09:00 – 20:00" },
+      { "day": "Saturday",        "time": "10:00 – 18:00" },
+      { "day": "Sunday",          "time": "Closed"        }
+    ],
+    "bookBtn": "Reserve a Session",
+    "copyright": "© 2026 Luxe Beauty. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Elegance"
+  },
+  "modal": {
+    "title": "Reserve Your Experience",
+    "subtitle": "Select your preferred date and our specialists will be ready to welcome you.",
+    "labelName": "Full Name",
+    "placeholderName": "Enter your name",
+    "labelPhone": "Phone",
+    "placeholderPhone": "+1 (___) ___ ____",
+    "labelEmail": "E-mail",
+    "placeholderEmail": "you@example.com",
+    "labelService": "Select a Treatment",
+    "services": ["Couture Nail Art", "Luminous Skin Ritual", "Permanent Artistry", "Brow Architecture", "Other"],
+    "labelDate": "Preferred Date",
+    "labelTime": "Preferred Time",
+    "times": ["09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"],
+    "labelNote": "Additional Notes (optional)",
+    "placeholderNote": "Share any special requests or questions with us...",
+    "submit": "Confirm Reservation",
+    "successTitle": "Your Request Has Been Received",
+    "successText": "Our concierge team will contact you shortly. We look forward to welcoming you to Luxe Beauty.",
+    "successClose": "Close",
+    "infoTitle": "The Luxe Beauty Difference",
+    "infoItems": [
+      "12+ Years of Mastery",
+      "3,000+ Cherished Clients",
+      "98% Satisfaction Rate",
+      "Bespoke Care Protocols"
+    ],
+    "infoHours": "Studio Hours",
+    "infoHoursVal": "Mon–Fri 09:00–20:00\nSat 10:00–18:00",
+    "infoPhone": "+90 500 123 45 67",
+    "close": "Close"
+  },
+  "faq": {
+    "eyebrow": "Curiosities",
+    "title": "Frequently Asked",
+    "titleItalic": "Questions",
+    "items": [
+      {
+        "q": "How long does laser hair removal take?",
+        "a": "Laser hair removal sessions vary between 15 minutes and 1 hour depending on the treatment area."
+      },
+      {
+        "q": "Does permanent makeup hurt?",
+        "a": "Thanks to the anesthetic creams applied before the procedure, the sensation of pain is minimized. Many of our clients find the process quite comfortable."
+      },
+      {
+        "q": "Are the products you use authentic?",
+        "a": "Yes, all our products are 100% authentic from world-renowned dermocosmetic and medical aesthetic brands."
+      },
+      {
+        "q": "How late can I cancel my appointment?",
+        "a": "You can cancel or reschedule your appointment by calling or sending a WhatsApp message at least 24 hours before your scheduled time."
+      }
+    ]
+  }
+}

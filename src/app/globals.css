@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Brand Colors */
+  --color-gold:          #D4AF37;
+  --color-gold-light:    #E8CC6A;
+  --color-gold-dark:     #A8861A;
+  --color-cream:         #FFFDD0;
+  --color-cream-dark:    #F5F0B0;
+  --color-charcoal:      #333333;
+  --color-charcoal-light:#555555;
+  --color-charcoal-muted:#888888;
+
+  /* Typography */
+  --font-serif: var(--font-cormorant, "Cormorant Garamond", Georgia, serif);
+  --font-sans:  var(--font-inter, "Inter", system-ui, sans-serif);
+
+  /* Spacing / Radius */
+  --radius-xl: 1.25rem;
+  --radius-2xl: 2rem;
+}
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Utility: Gold Shimmer Button ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: linear-gradient(
+    90deg,
+    var(--color-gold-dark) 0%,
+    var(--color-gold) 40%,
+    var(--color-gold-light) 60%,
+    var(--color-gold) 80%,
+    var(--color-gold-dark) 100%
+  );
+  background-size: 200% auto;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  animation: shimmer 3s linear infinite;
+}
+
+.btn-gold:hover {
+  box-shadow: 0 6px 30px rgba(212, 175, 55, 0.55);
+  transform: translateY(-2px);
+}
+
+.btn-gold:active { transform: translateY(0); }
+
+/* ── Utility: Ghost Button ── */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.72rem 1.75rem;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color-charcoal);
+  border: 1.5px solid var(--color-gold);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--color-gold);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ── Decorative divider ── */
+.gold-line {
+  width: 3.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+  border-radius: 999px;
+}
