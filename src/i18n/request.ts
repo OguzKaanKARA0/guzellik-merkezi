@@ -15,5 +15,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
       ? (await import("@/messages/en.json")).default
       : (await import("@/messages/tr.json")).default;
 
-  return { locale, messages };
+  return {
+    locale,
+    messages,
+    timeZone: "Europe/Istanbul"
+  };
 });
