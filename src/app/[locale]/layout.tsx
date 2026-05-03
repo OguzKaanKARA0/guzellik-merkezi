@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Cormorant_Garamond } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { notFound } from "next/navigation";
 import { getMessages } from "next-intl/server";
 import { setRequestLocale } from "next-intl/server";
@@ -13,10 +13,10 @@ const inter = Inter({
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -70,11 +70,56 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${inter.variable} ${cormorant.variable} h-full`}>
+    <html lang={locale} className={`${inter.variable} ${playfair.variable} h-full`}>
       <body className="min-h-full flex flex-col antialiased">
         <Providers locale={locale} messages={messages}>
           {children}
         </Providers>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BeautySalon",
+              "name": "Luxe Beauty",
+              "image": "https://luxebeauty.com/gallery/before-after-after.jpg",
+              "@id": "https://luxebeauty.com",
+              "url": "https://luxebeauty.com",
+              "telephone": "+905001234567",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Nişantaşı, Valikonağı Cd.",
+                "addressLocality": "Şişli",
+                "addressRegion": "İstanbul",
+                "postalCode": "34365",
+                "addressCountry": "TR"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 41.0584555,
+                "longitude": 28.9863483
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                  "opens": "09:00",
+                  "closes": "20:00"
+                }
+              ],
+              "sameAs": [
+                "https://facebook.com/luxebeauty",
+                "https://instagram.com/luxebeauty"
+              ],
+              "priceRange": "$$",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "1250"
+              }
+            })
+          }}
+        />
       </body>
     </html>
   );
