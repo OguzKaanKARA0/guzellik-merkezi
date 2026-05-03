@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✨ Luxe Beauty | Premium SaaS Beauty Management
 
-## Getting Started
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-Database-blue?style=for-the-badge&logo=supabase)](https://supabase.com/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-MIT-gold?style=for-the-badge)](LICENSE)
 
-First, run the development server:
+**Luxe Beauty**, güzellik merkezleri ve klinikler için tasarlanmış, yüksek dönüşüm odaklı ve estetik açıdan kusursuz bir Dikey SaaS (Vertical SaaS) platformudur. Modern web teknolojilerini, lüks bir kullanıcı deneyimi (UX) ve güçlü bir yönetim paneliyle birleştirir.
 
+---
+
+## 💎 Vizyonumuz
+Güzellik endüstrisinde dijitalleşmeyi sadece bir gereklilik değil, bir prestij unsuru haline getirmek. Luxe Beauty, müşterilerine premium bir rezervasyon deneyimi sunarken, salon sahiplerine operasyonel mükemmellik sağlar.
+
+## 🚀 Öne Çıkan Özellikler
+
+-   **Premium UI/UX:** Playfair Display ve Inter tipografisiyle harmanlanmış, altın oran esaslı modern tasarım.
+-   **Gelişmiş Randevu Sistemi:** Gerçek zamanlı müsaitlik kontrolü ve çakışma önleyici algoritma.
+-   **Akıllı Lead Capture:** WhatsApp entegrasyonlu teklif alma modalı ve otomatik veri senkronizasyonu.
+-   **Yönetim Paneli (CRM):** Randevuları onaylama, iptal etme ve müşteri taleplerini yönetme yeteneği.
+-   **Çok Dillilik (i18n):** Türkçe ve İngilizce dillerinde tam kapsamlı dinamik içerik yönetimi.
+-   **SEO & Performans:** Schema.org (BeautySalon) entegrasyonu, dinamik metadata ve %100 mobil uyumluluk.
+
+## 🛠 Teknoloji Yığını
+
+-   **Framework:** [Next.js 15 (App Router)](https://nextjs.org/)
+-   **Database & Auth:** [Supabase](https://supabase.com/)
+-   **Styling:** Vanilla CSS & TailwindCSS (Global Tokens)
+-   **Email:** [Resend](https://resend.com/)
+-   **Icons:** Lucide React
+-   **Internationalization:** next-intl
+
+## 📦 Kurulum ve Çalıştırma
+
+### 1. Depoyu Klonlayın
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/OguzKaanKARA0/guzellik-merkezi.git
+cd guzellik-merkezi
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Bağımlılıkları Yükleyin
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Çevresel Değişkenleri Yapılandırın
+`.env.local` dosyasını oluşturun ve aşağıdaki değişkenleri tanımlayın:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+RESEND_API_KEY=your_resend_key
+BOOKING_TO_EMAIL=admin@example.com
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Geliştirme Sunucusunu Başlatın
+```bash
+npm run dev
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛡 Güvenlik ve Mimari
+Sistem, hassas operasyonlar (silme, güncelleme) için **Supabase Service Role** anahtarını sunucu tarafında (Server Actions) kullanarak RLS (Row Level Security) katmanını güvenli bir şekilde yönetir. İstemci tarafında sadece anonim erişime izin verilir.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 Lisans
+Bu proje MIT lisansı ile lisanslanmıştır. Daha fazla bilgi için `LICENSE` dosyasına bakınız.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Luxe Beauty - Estetik ve Teknolojinin Buluşma Noktası.*
