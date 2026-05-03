@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 
 /* ── İstemciler (modül seviyesi singleton) ── */
@@ -63,6 +64,9 @@ export async function POST(req: NextRequest) {
 
     const bookingId = (data as { id: string }).id;
     console.log("[send-booking] Supabase'e kaydedildi, ID:", bookingId);
+
+    // Admin panelini senkronize et (Tüm diller için global)
+    revalidatePath("/", "layout");
 
     /* ── Adım 3: Resend ile e-posta gönder (opsiyonel) ── */
     const toEmail = process.env.BOOKING_TO_EMAIL;

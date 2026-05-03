@@ -7,6 +7,7 @@ import { X, Check, Phone, Clock, Star, ChevronDown, Loader2 } from "lucide-react
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import { useBooking } from "@/context/BookingContext";
+import { STATS } from "@/constants/stats";
 
 /* ─────────────────────────────────────────────────────────
    Appointment Modal
@@ -26,6 +27,7 @@ export default function AppointmentModal() {
   const [selectedTime, setSelectedTime] = useState("");
   const [bookedTimes, setBookedTimes]   = useState<string[]>([]);
   const [isFetchingTimes, setIsFetchingTimes] = useState(false);
+  const [formErrors, setFormErrors] = useState<{ name?: string; phone?: string }>({});
   const formRef = useRef<HTMLFormElement>(null);
 
   /* ── Fetch booked times when selectedDate changes ── */
@@ -55,32 +57,27 @@ export default function AppointmentModal() {
     return () => { isMounted = false; };
   }, [selectedDate]);
 
-  /* ── Transition + mobile body-lock ── */
+  /* ── Transition + modern body-lock ── */
   useEffect(() => {
     if (isOpen) {
-      // Scroll pozisyonunu kaydet (iOS sayfa sıçramasını önler)
-      const scrollY = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top      = `-${scrollY}px`;
-      document.body.style.left     = "0";
-      document.body.style.right    = "0";
+      // Sayfa zıplamasını önlemek için scrollbar genişliğini hesapla
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
       document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
+      
       requestAnimationFrame(() => setVisible(true));
     } else {
       requestAnimationFrame(() => setVisible(false));
       const timer = setTimeout(() => {
-        // Scroll pozisyonunu geri yükle
-        const scrollY = parseInt(document.body.style.top || "0") * -1;
-        document.body.style.position = "";
-        document.body.style.top      = "";
-        document.body.style.left     = "";
-        document.body.style.right    = "";
-        document.body.style.overflow = "";
-        document.documentElement.style.overflow = "";
-        window.scrollTo(0, scrollY);
+        document.body.style.paddingRight = "";
+        document.body.style.overflow     = "";
+        
         setStatus("idle");
         setErrorMsg("");
+        setFormErrors({});
         formRef.current?.reset();
         setSelectedDate("");
         setSelectedTime("");
@@ -103,10 +100,34 @@ export default function AppointmentModal() {
     setErrorMsg("");
 
     const fd = new FormData(e.currentTarget);
+    const name = fd.get("name") as string;
+    const phone = fd.get("phone") as string;
+
+    // Validation
+    const newErrors: { name?: string; phone?: string } = {};
+    const nameRegex = /^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/;
+    const phoneRegex = /^[0-9]+$/;
+
+    if (!nameRegex.test(name) || name.trim().length < 3) {
+      newErrors.name = "İsim en az 3 harf ve sadece harflerden oluşmalıdır.";
+    }
+    const cleanPhone = phone.replace(/\s/g, "");
+    if (!phoneRegex.test(cleanPhone)) {
+      newErrors.phone = "Telefon sadece rakamlardan oluşmalıdır.";
+    } else if (cleanPhone.length < 10 || cleanPhone.length > 11) {
+      newErrors.phone = "Telefon numarası 10 veya 11 hane olmalıdır.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setFormErrors(newErrors);
+      setStatus("idle");
+      return;
+    }
+
     const payload = {
       locale,
-      name:    fd.get("name")    as string,
-      phone:   fd.get("phone")   as string,
+      name,
+      phone,
       email:   fd.get("email")   as string,
       service: fd.get("service") as string,
       date:    fd.get("date")    as string,
@@ -121,12 +142,23 @@ export default function AppointmentModal() {
         body:    JSON.stringify(payload),
       });
       const data = await res.json();
-      if (!res.ok || !data.ok) throw new Error(data.error ?? "Unknown error");
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || "Sunucuyla iletişim kurulurken bir hata oluştu.");
+      }
       setStatus("success");
     } catch (err) {
-      console.error(err);
+      console.error("[AppointmentModal] Submit Error:", err);
       setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Bir hata oluştu.");
+      
+      let friendlyMsg = "Bir hata oluştu, lütfen tekrar deneyin.";
+      if (err instanceof Error) {
+        if (err.message.includes("fetch")) {
+          friendlyMsg = "İnternet bağlantınızı kontrol edin.";
+        } else {
+          friendlyMsg = err.message;
+        }
+      }
+      setErrorMsg(friendlyMsg);
     }
   };
 
@@ -134,7 +166,13 @@ export default function AppointmentModal() {
 
   const services  = t.raw("services")  as string[];
   const times     = t.raw("times")     as string[];
-  const infoItems = t.raw("infoItems") as string[];
+  
+  const infoItems = [
+    `${STATS.years.value}${STATS.years.suffix} ${t("infoYears")}`,
+    `${STATS.clients.value}${STATS.clients.suffix} ${t("infoClients")}`,
+    `${STATS.satisfaction.suffix}${STATS.satisfaction.value} ${t("infoSatisfaction")}`,
+    t("infoProtocols")
+  ];
 
   return (
     <div
@@ -242,10 +280,12 @@ export default function AppointmentModal() {
               {/* Name + Phone */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.875rem" }} className="form-row">
                 <Field label={t("labelName")} required>
-                  <input id="modal-name" name="name" type="text" required placeholder={t("placeholderName")} style={inputStyle} />
+                  <input id="modal-name" name="name" type="text" required placeholder={t("placeholderName")} style={{ ...inputStyle, borderColor: formErrors.name ? "#ef4444" : "rgba(212,175,55,0.28)" }} onChange={() => setFormErrors(prev => ({ ...prev, name: undefined }))} />
+                  {formErrors.name && <span style={{ fontSize: "0.7rem", color: "#ef4444", marginTop: "0.2rem" }}>{formErrors.name}</span>}
                 </Field>
                 <Field label={t("labelPhone")} required>
-                  <input id="modal-phone" name="phone" type="tel" required placeholder={t("placeholderPhone")} style={inputStyle} />
+                  <input id="modal-phone" name="phone" type="tel" required placeholder={t("placeholderPhone")} style={{ ...inputStyle, borderColor: formErrors.phone ? "#ef4444" : "rgba(212,175,55,0.28)" }} onChange={() => setFormErrors(prev => ({ ...prev, phone: undefined }))} />
+                  {formErrors.phone && <span style={{ fontSize: "0.7rem", color: "#ef4444", marginTop: "0.2rem" }}>{formErrors.phone}</span>}
                 </Field>
               </div>
 
