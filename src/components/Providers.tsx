@@ -3,6 +3,8 @@
 import { NextIntlClientProvider, Messages } from "next-intl";
 import { BookingProvider } from "@/context/BookingContext";
 import AppointmentModal from "@/components/AppointmentModal";
+import ServiceDetailsModal from "@/components/ServiceDetailsModal";
+import OfferModal from "@/components/OfferModal";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 /**
@@ -25,6 +27,8 @@ export default function Providers({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <BookingProvider>
         <AppointmentModal />
+        <ServiceDetailsModal />
+        <OfferModal />
         <WhatsAppButton />
         {children}
       </BookingProvider>

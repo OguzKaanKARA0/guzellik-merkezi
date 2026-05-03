@@ -9,10 +9,11 @@ import { useBooking } from "@/context/BookingContext";
 
 export default function Navbar() {
   const t = useTranslations("nav");
+  const tServices = useTranslations("services");
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { openModal } = useBooking();
+  const { openModal, openServiceDetails } = useBooking();
 
   const currentLocale =
     routing.locales.find((l) => pathname.startsWith(`/${l}`)) ??
@@ -27,7 +28,6 @@ export default function Navbar() {
     { href: `/${currentLocale}#hizmetler`, label: t("services") },
     { href: `/${currentLocale}#galeri`,    label: t("gallery")  },
     { href: `/${currentLocale}#faq`,       label: t("faq")      },
-    { href: `/${currentLocale}#iletisim`,  label: t("contact")  },
   ];
 
   return (
@@ -36,10 +36,10 @@ export default function Navbar() {
         position: "sticky",
         top: 0,
         zIndex: 50,
-        backgroundColor: "rgba(255,253,208,0.88)",
-        backdropFilter: "blur(14px)",
-        WebkitBackdropFilter: "blur(14px)",
-        borderBottom: "1px solid rgba(212,175,55,0.18)",
+        backgroundColor: "rgba(250, 247, 242, 0.92)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        borderBottom: "0.5px solid rgba(201, 169, 110, 0.3)",
         /* ── Prevent vertical layout shift ── */
         minHeight: "72px",
       }}
@@ -88,26 +88,117 @@ export default function Navbar() {
           className="nav-desktop"
           style={{ display: "flex", alignItems: "center", gap: "2rem", flexShrink: 0 }}
         >
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              style={{
-                fontFamily: "var(--font-sans)",
-                fontSize: "0.875rem",
-                fontWeight: 500,
-                letterSpacing: "0.06em",
-                color: "var(--color-charcoal-light)",
-                textDecoration: "none",
-                transition: "color 0.2s",
-                whiteSpace: "nowrap",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-gold)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-charcoal-light)")}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            if (l.label === t("services")) {
+              return (
+                <div key={l.href} style={{ position: "relative" }} className="nav-dropdown-container">
+                  <a
+                    href={l.href}
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: "0.875rem",
+                      fontWeight: 500,
+                      letterSpacing: "0.06em",
+                      color: "var(--color-charcoal-light)",
+                      textDecoration: "none",
+                      transition: "color 0.2s",
+                      whiteSpace: "nowrap",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.25rem",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-gold)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-charcoal-light)")}
+                  >
+                    {l.label}
+                  </a>
+                  <div className="nav-dropdown" style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: "50%",
+                    transform: "translateX(-50%) translateY(-10px)",
+                    paddingTop: "1.5rem",
+                    opacity: 0,
+                    visibility: "hidden",
+                    transition: "opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.4s",
+                    zIndex: 100,
+                  }}>
+                    <div style={{
+                      backgroundColor: "rgba(250, 247, 242, 0.8)",
+                      backdropFilter: "blur(12px)",
+                      WebkitBackdropFilter: "blur(12px)",
+                      border: "0.5px solid rgba(201, 169, 110, 0.2)",
+                      borderRadius: "0.75rem",
+                      padding: "1rem",
+                      boxShadow: "0 10px 40px rgba(0,0,0,0.05)",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "0.5rem",
+                      minWidth: "220px"
+                    }}>
+                      {[
+                        { id: "hair", label: tServices("hair") },
+                        { id: "skin", label: tServices("skin") },
+                        { id: "makeup", label: tServices("makeup") },
+                        { id: "nails", label: tServices("nails") },
+                        { id: "brows", label: tServices("brows") },
+                        { id: "permanent", label: tServices("permanent") }
+                      ].map(svc => (
+                        <button
+                          key={svc.id}
+                          onClick={() => openServiceDetails(svc.id)}
+                          style={{
+                            textAlign: "left",
+                            background: "none",
+                            border: "none",
+                            borderLeft: "2px solid transparent",
+                            padding: "0.6rem 1rem",
+                            cursor: "pointer",
+                            fontSize: "0.9rem",
+                            fontFamily: "var(--font-sans)",
+                            color: "var(--color-charcoal)",
+                            transition: "all 0.3s ease"
+                          }}
+                          onMouseEnter={(e) => { 
+                            e.currentTarget.style.color = "var(--color-gold)"; 
+                            e.currentTarget.style.borderLeftColor = "var(--color-gold)"; 
+                            e.currentTarget.style.background = "rgba(212,175,55,0.05)"; 
+                          }}
+                          onMouseLeave={(e) => { 
+                            e.currentTarget.style.color = "var(--color-charcoal)"; 
+                            e.currentTarget.style.borderLeftColor = "transparent"; 
+                            e.currentTarget.style.background = "none"; 
+                          }}
+                        >
+                          {svc.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.06em",
+                  color: "var(--color-charcoal-light)",
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                  whiteSpace: "nowrap",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-gold)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-charcoal-light)")}
+              >
+                {l.label}
+              </a>
+            );
+          })}
 
           {/* ── Language Switcher ── */}
           <LanguageSwitcher current={currentLocale} onSwitch={switchLocale} />
@@ -143,8 +234,8 @@ export default function Navbar() {
       {open && (
         <div
           style={{
-            background: "var(--color-cream)",
-            borderTop: "1px solid rgba(212,175,55,0.2)",
+            background: "var(--color-bg)",
+            borderTop: "0.5px solid rgba(201, 169, 110, 0.3)",
             padding: "1.5rem",
             display: "flex",
             flexDirection: "column",
@@ -173,7 +264,7 @@ export default function Navbar() {
               alignItems: "center",
               gap: "0.5rem",
               paddingTop: "0.75rem",
-              borderTop: "1px solid rgba(212,175,55,0.2)",
+              borderTop: "0.5px solid rgba(201, 169, 110, 0.3)",
             }}
           >
             <span
@@ -202,6 +293,11 @@ export default function Navbar() {
       <style>{`
         @media (max-width: 768px) { .nav-desktop    { display: none !important; } }
         @media (min-width: 769px) { .nav-mobile-btn { display: none !important; } }
+        .nav-dropdown-container:hover .nav-dropdown {
+          opacity: 1 !important;
+          visibility: visible !important;
+          transform: translateX(-50%) translateY(0) !important;
+        }
       `}</style>
     </header>
   );

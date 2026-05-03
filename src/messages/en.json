@@ -8,62 +8,89 @@
     "bookBtn": "Book Your Experience"
   },
   "hero": {
-    "badge": "An Invitation to Refinement",
-    "title1": "Experience the Art of",
-    "titleItalic": "Refined Beauty",
-    "title2": "Crafted for You",
-    "description": "Our atelier of beauty specialists and curated luxury products deliver rituals designed exclusively for you — where elegance meets transformation.",
-    "stat1Num": "12+",
-    "stat1Label": "Years of Mastery",
-    "stat2Num": "3K+",
-    "stat2Label": "Cherished Clients",
-    "stat3Num": "98%",
-    "stat3Label": "Satisfaction",
-    "ctaPrimary": "Reserve Your Session",
-    "ctaSecondary": "Call the Studio",
-    "placeholderTitle": "The Atelier",
-    "placeholderSub": "A glimpse of our sanctuary",
-    "badgePreferred": "Most Sought-After",
-    "badgeReviews": "5.0 / 324 Reviews",
-    "badgeSlotLabel": "Next Available",
-    "badgeSlotValue": "This Week"
+    "badge": "Premium Beauty Experience",
+    "title1": "Rediscover",
+    "titleItalic": "Your",
+    "title2": "Elegance",
+    "description": "Achieve your best version with luxurious touches that pamper your soul and body in our European standard center.",
+    "ctaPrimary": "Start the Experience",
+    "ctaSecondary": "Call Us",
+    "placeholderTitle": "Salon Visual",
+    "placeholderSub": "Premium visual will be placed here",
+    "titleStatic": "Rediscover Your",
+    "titleWords": [
+      "Elegance",
+      "Radiance",
+      "Confidence"
+    ]
   },
   "services": {
-    "eyebrow": "Our Mastery",
-    "title": "Signature",
-    "titleItalic": "Treatments",
-    "badgePopular": "Signature",
-    "badgeNew": "New",
-    "cta": "Discover More",
-    "items": [
-      {
-        "id": "protez-tirnak",
-        "title": "Couture Nail Art",
-        "description": "Elevate your hands with our bespoke nail extensions, crafted using the finest materials and avant-garde techniques by our master nail artists.",
-        "badge": "Signature"
+    "badge": "Privileges",
+    "title": "Personalized",
+    "titleItalic": "Touches",
+    "desc": "Discover premium services that will elevate your beauty to the highest level with our expert team.",
+    "hair": "Hair Design",
+    "skin": "Premium Skin Care",
+    "makeup": "Custom Makeup",
+    "nails": "Manicure & Pedicure",
+    "brows": "Brow Design",
+    "permanent": "Permanent Makeup",
+    "cta": "Discover",
+    "details": {
+      "hair": {
+        "title": "Hair Design",
+        "duration": "45-90 Minutes",
+        "description": "Modern cuts and premium coloring procedures that best suit your facial features and personal style.",
+        "process": "Consists of comprehensive hair analysis, personalized cut/color design, and styling with elite products."
       },
-      {
-        "id": "cilt-bakimi",
-        "title": "Luminous Skin Ritual",
-        "description": "Restore your skin's natural brilliance through our deeply restorative cleansing, hydration and age-defying treatments — each protocol tailored to your unique skin.",
-        "badge": "New"
+      "skin": {
+        "title": "Premium Skin Care",
+        "duration": "60 Minutes",
+        "description": "We restore the radiance and youth your skin needs using the world's most exclusive dermocosmetic brands.",
+        "process": "Completed with skin analysis, deep cleansing, serum infusion, and relaxing massage techniques."
       },
-      {
-        "id": "kalici-makyaj",
-        "title": "Permanent Artistry",
-        "description": "Wake up flawless every morning with our precision microblading, ombré brow sculpting and lip contouring. Results that endure 1–3 years.",
-        "badge": null
+      "makeup": {
+        "title": "Custom Makeup",
+        "duration": "45-60 Minutes",
+        "description": "Long-lasting and porcelain-finish makeup designs applied by our professional makeup artists on your special days.",
+        "process": "Skin base preparation, selection of luxury products suitable for your skin type, and professional application."
+      },
+      "nails": {
+        "title": "Manicure & Pedicure",
+        "duration": "60-90 Minutes",
+        "description": "A medical and spa-focused hand-foot care ritual that prioritizes not only aesthetics but also health.",
+        "process": "Exfoliation of dead skin, nail form design, and premium polish/gel application."
+      },
+      "brows": {
+        "title": "Brow Design",
+        "duration": "30-45 Minutes",
+        "description": "Permanent or semi-permanent brow design that enhances your expression, tailored to the golden ratio of the face.",
+        "process": "Facial measurement, form determination, golden ratio drawing, and gentle shaping procedure."
+      },
+      "permanent": {
+        "title": "Permanent Makeup",
+        "duration": "90-120 Minutes",
+        "description": "Lip, eyeliner, or dipliner permanent makeup applications that allow you to wake up fresh and flawless every morning.",
+        "process": "Local anesthetic cream, design approval, and application with a medical micro-pigmentation device."
       }
-    ]
+    }
   },
   "gallery": {
     "eyebrow": "A Curated Collection",
     "title": "The Portfolio of Elegance",
     "items": [
-      { "label": "Couture Nails" },
-      { "label": "Skin Luminosity" },
-      { "label": "Brow Architecture" },
-      { "label": "Permanent Artistry" }
+      {
+        "label": "Couture Nails"
+      },
+      {
+        "label": "Skin Luminosity"
+      },
+      {
+        "label": "Brow Architecture"
+      },
+      {
+        "label": "Permanent Artistry"
+      }
     ]
   },
   "beforeAfter": {
@@ -83,9 +110,18 @@
     "address": "Bağcılar District, Beauty Street No:12\nŞişli / Istanbul",
     "hoursTitle": "Studio Hours",
     "hours": [
-      { "day": "Monday – Friday", "time": "09:00 – 20:00" },
-      { "day": "Saturday",        "time": "10:00 – 18:00" },
-      { "day": "Sunday",          "time": "Closed"        }
+      {
+        "day": "Monday – Friday",
+        "time": "09:00 – 20:00"
+      },
+      {
+        "day": "Saturday",
+        "time": "10:00 – 18:00"
+      },
+      {
+        "day": "Sunday",
+        "time": "Closed"
+      }
     ],
     "bookBtn": "Reserve a Session",
     "copyright": "© 2026 Luxe Beauty. All rights reserved.",
@@ -102,10 +138,25 @@
     "labelEmail": "E-mail",
     "placeholderEmail": "you@example.com",
     "labelService": "Select a Treatment",
-    "services": ["Couture Nail Art", "Luminous Skin Ritual", "Permanent Artistry", "Brow Architecture", "Other"],
+    "services": [
+      "Couture Nail Art",
+      "Luminous Skin Ritual",
+      "Permanent Artistry",
+      "Brow Architecture",
+      "Other"
+    ],
     "labelDate": "Preferred Date",
     "labelTime": "Preferred Time",
-    "times": ["09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"],
+    "times": [
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00"
+    ],
     "labelNote": "Additional Notes (optional)",
     "placeholderNote": "Share any special requests or questions with us...",
     "submit": "Confirm Reservation",
@@ -113,12 +164,10 @@
     "successText": "Our concierge team will contact you shortly. We look forward to welcoming you to Luxe Beauty.",
     "successClose": "Close",
     "infoTitle": "The Luxe Beauty Difference",
-    "infoItems": [
-      "12+ Years of Mastery",
-      "3,000+ Cherished Clients",
-      "98% Satisfaction Rate",
-      "Bespoke Care Protocols"
-    ],
+    "infoYears": "Years of Mastery",
+    "infoClients": "Cherished Clients",
+    "infoSatisfaction": "Satisfaction Rate",
+    "infoProtocols": "Bespoke Care Protocols",
     "infoHours": "Studio Hours",
     "infoHoursVal": "Mon–Fri 09:00–20:00\nSat 10:00–18:00",
     "infoPhone": "+90 500 123 45 67",
@@ -146,5 +195,127 @@
         "a": "You can cancel or reschedule your appointment by calling or sending a WhatsApp message at least 24 hours before your scheduled time."
       }
     ]
+  },
+  "pricing": {
+    "title": "Choose the Plan That Fits Your Vision",
+    "subtitle": "Bespoke Solutions",
+    "perMonth": "/mo",
+    "cta": "Get Started Now",
+    "plans": {
+      "basic": {
+        "name": "Basic",
+        "price": "$49",
+        "description": "The perfect starting point for boutique salons and specialists.",
+        "features": [
+          "Bespoke Luxury Website",
+          "Email Inquiry System",
+          "Mobile-First Design",
+          "Core SEO Foundations"
+        ]
+      },
+      "pro": {
+        "name": "Standard",
+        "price": "$99",
+        "description": "For growing ateliers looking to digitize their operations.",
+        "features": [
+          "Advanced Booking System",
+          "Private Admin Console",
+          "WhatsApp Concierge Notifications",
+          "Client Management (CRM)",
+          "Performance Insights"
+        ],
+        "tag": "Most Popular"
+      },
+      "ai": {
+        "name": "AI Enabled",
+        "price": "$179",
+        "description": "The future of beauty, driven by intelligence and elegance.",
+        "features": [
+          "AI Skin Architecture Analysis",
+          "Intelligent Booking Concierge",
+          "Predictive Client Retention",
+          "Social Media Automation",
+          "Priority Concierge Support"
+        ]
+      }
+    }
+  },
+  "about": {
+    "badge": "Our Story",
+    "title": "Years Dedicated to Excellence",
+    "storyP1": "Luxe Beauty believes that beauty is not just about physical appearance, but a matter of inner confidence. With the most exclusive products and world-class specialists, we offer each guest a unique 'escape' where they will feel special.",
+    "storyP2": "Our goal is to highlight your natural beauty in the most luxurious and sterile conditions.",
+    "stat1Num": "15+",
+    "stat1Label": "Years of Mastery",
+    "stat2Num": "10k+",
+    "stat2Label": "Satisfied Clients",
+    "stat3Num": "12",
+    "stat3Label": "Certified Specialists"
+  },
+  "whyUs": {
+    "badge": "Why Us",
+    "title": "The Luxury Standard in Beauty",
+    "f1Title": "Hygiene Excellence",
+    "f1Desc": "We provide the safest environment with hospital-grade sterilization processes.",
+    "f2Title": "Certified Specialists",
+    "f2Desc": "Award-winning master artists, each graduated from global academies in their fields.",
+    "f3Title": "Premium Products",
+    "f3Desc": "We use only dermatologically proven, the world's most exclusive luxury brands."
+  },
+  "ctaBanner": {
+    "title": "Time to Pamper Yourself",
+    "subtitle": "Secure your spot from our limited quota for this week and experience luxury.",
+    "btn": "Secure Your Session"
+  },
+  "team": {
+    "badge": "Our Experts",
+    "title": "Architects of",
+    "titleItalic": "Artistry",
+    "members": [
+      {
+        "name": "Aylin S.",
+        "role": "Master Artist & Founder"
+      },
+      {
+        "name": "Buse K.",
+        "role": "Premium Skin Specialist"
+      },
+      {
+        "name": "Cemre T.",
+        "role": "Permanent Makeup Educator"
+      }
+    ]
+  },
+  "testimonials": {
+    "badge": "Client Experiences",
+    "title": "Reflections of",
+    "titleItalic": "Perfection",
+    "reviews": [
+      {
+        "name": "Zeynep Y.",
+        "service": "Couture Nails",
+        "text": "My experience at Luxe Beauty was incredible. The quality of the products and the hygiene of the environment truly feel premium. Highly recommended."
+      },
+      {
+        "name": "Selin A.",
+        "service": "Skin Care",
+        "text": "The radiance and freshness of my skin after the facial were magnificent. The specialists' attention and personalized approach are wonderful."
+      },
+      {
+        "name": "Esra D.",
+        "service": "Permanent Makeup",
+        "text": "I came for brow design and I'm very satisfied with the result. It looks completely natural and exactly as I wanted. Thank you Luxe Beauty!"
+      }
+    ]
+  },
+  "contact": {
+    "badge": "Get in Touch",
+    "title": "Contact",
+    "titleItalic": "Us",
+    "desc": "Send a message to our expert team for your questions or special requests. We will get back to you as soon as possible.",
+    "name": "Full Name",
+    "email": "Email",
+    "message": "Your Message",
+    "btn": "Send Message"
   }
 }

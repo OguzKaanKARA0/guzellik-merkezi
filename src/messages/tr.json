@@ -9,61 +9,88 @@
   },
   "hero": {
     "badge": "Premium Güzellik Deneyimi",
-    "title1": "Güzelliğinizi",
-    "titleItalic": "Profesyonel",
-    "title2": "Dokunuşlarla Keşfedin",
-    "description": "Uzman ekibimiz ve lüks ürünlerimizle size özel bakım deneyimi sunuyoruz. Saç, cilt ve güzellik ritüellerinizi elit bir atmosferde yaşayın.",
-    "stat1Num": "12+",
-    "stat1Label": "Yıllık Deneyim",
-    "stat2Num": "3K+",
-    "stat2Label": "Mutlu Müşteri",
-    "stat3Num": "98%",
-    "stat3Label": "Memnuniyet",
-    "ctaPrimary": "Hemen Randevu Oluştur",
+    "title1": "Zarafetinizi",
+    "titleItalic": "Yeniden",
+    "title2": "Keşfedin",
+    "description": "Avrupa standartlarındaki merkezimizde, ruhunuzu ve bedeninizi şımartan lüks dokunuşlarla en iyi versiyonunuza kavuşun.",
+    "ctaPrimary": "Deneyimi Başlatın",
     "ctaSecondary": "Bizi Ara",
     "placeholderTitle": "Salon Görseli",
     "placeholderSub": "Buraya premium görsel gelecek",
-    "badgePreferred": "Çok Tercih Edilen",
-    "badgeReviews": "5.0 / 324 Yorum",
-    "badgeSlotLabel": "Sonraki Slot",
-    "badgeSlotValue": "Bu Hafta Uygun"
+    "titleStatic": "Zarafetinizi Yeniden",
+    "titleWords": [
+      "Keşfedin",
+      "Yaşayın",
+      "Taçlandırın"
+    ]
   },
   "services": {
-    "eyebrow": "Uzmanlık Alanlarımız",
-    "title": "Öne Çıkan",
-    "titleItalic": "Hizmetlerimiz",
-    "badgePopular": "En Popüler",
-    "badgeNew": "Yeni",
-    "cta": "Detaylı Bilgi",
-    "items": [
-      {
-        "id": "protez-tirnak",
-        "title": "Protez Tırnak",
-        "description": "Dayanıklı ve estetik protez tırnak uygulamalarıyla ellerinizi her zaman bakımlı tutun. Uzman ekibimiz en güncel tırnak sanatı tekniklerini kullanır.",
-        "badge": "En Popüler"
+    "badge": "Ayrıcalıklar",
+    "title": "Size Özel",
+    "titleItalic": "Dokunuşlar",
+    "desc": "Alanında uzman ekibimizle, güzelliğinizi en üst seviyeye taşıyacak premium hizmetleri keşfedin.",
+    "hair": "Saç Tasarımı",
+    "skin": "Premium Cilt Bakımı",
+    "makeup": "Kişiye Özel Makyaj",
+    "nails": "Manikür & Pedikür",
+    "brows": "Kaş Tasarımı",
+    "permanent": "Kalıcı Makyaj",
+    "cta": "Keşfet",
+    "details": {
+      "hair": {
+        "title": "Saç Tasarımı",
+        "duration": "45-90 Dakika",
+        "description": "Yüz hatlarınıza ve kişisel tarzınıza en uygun modern kesimler ve premium renklendirme işlemleri.",
+        "process": "Kapsamlı saç analizi, size özel kesim/renk tasarımı ve elit ürünlerle şekillendirme aşamalarından oluşur."
       },
-      {
-        "id": "cilt-bakimi",
-        "title": "Cilt Bakımı",
-        "description": "Derin temizleme, nem takviyesi ve anti-aging uygulamalarla cildinizin doğal parlaklığını geri kazanın. Kişiselleştirilmiş cilt analizi dahildir.",
-        "badge": "Yeni"
+      "skin": {
+        "title": "Premium Cilt Bakımı",
+        "duration": "60 Dakika",
+        "description": "Dünyanın en seçkin dermokozmetik markalarıyla cildinize ihtiyaç duyduğu parlaklığı ve gençliği geri kazandırıyoruz.",
+        "process": "Cilt analizi, derinlemesine temizlik, serum infüzyonu ve rahatlatıcı masaj teknikleriyle tamamlanır."
       },
-      {
-        "id": "kalici-makyaj",
+      "makeup": {
+        "title": "Kişiye Özel Makyaj",
+        "duration": "45-60 Dakika",
+        "description": "Özel günlerinizde profesyonel makyaj artistlerimiz tarafından uygulanan kalıcı ve porselen bitişli makyaj tasarımları.",
+        "process": "Cilt bazı hazırlığı, ten yapınıza uygun lüks ürün seçimi ve profesyonel uygulama."
+      },
+      "nails": {
+        "title": "Manikür & Pedikür",
+        "duration": "60-90 Dakika",
+        "description": "Sadece estetik değil, aynı zamanda sağlığı da ön planda tutan medikal ve spa odaklı el-ayak bakım ritüeli.",
+        "process": "Ölü derilerden arındırma, tırnak form tasarımı ve premium oje/jel uygulaması."
+      },
+      "brows": {
+        "title": "Kaş Tasarımı",
+        "duration": "30-45 Dakika",
+        "description": "Yüzün altın oranına uygun olarak tasarlanan, ifadenizi güçlendiren kalıcı veya yarı kalıcı kaş dizaynı.",
+        "process": "Yüz ölçümü, form belirlenmesi, altın oran çizimi ve nazik şekillendirme işlemi."
+      },
+      "permanent": {
         "title": "Kalıcı Makyaj",
-        "description": "Microblading, ombre kaş ve dudak kontürü uygulamalarıyla her gün kusursuz görünün. Sonuçlar 1–3 yıl kalıcıdır.",
-        "badge": null
+        "duration": "90-120 Dakika",
+        "description": "Her sabah taze ve kusursuz uyanmanızı sağlayan dudak, eyeliner veya dipliner kalıcı makyaj uygulamaları.",
+        "process": "Lokal anestezi kremi, tasarım onayı ve medikal mikro-pigmentasyon cihazıyla uygulama."
       }
-    ]
+    }
   },
   "gallery": {
     "eyebrow": "Portfolyomuz",
     "title": "Çalışmalarımız",
     "items": [
-      { "label": "Protez Tırnak" },
-      { "label": "Cilt Bakımı" },
-      { "label": "Kaş Tasarımı" },
-      { "label": "Kalıcı Makyaj" }
+      {
+        "label": "Protez Tırnak"
+      },
+      {
+        "label": "Cilt Bakımı"
+      },
+      {
+        "label": "Kaş Tasarımı"
+      },
+      {
+        "label": "Kalıcı Makyaj"
+      }
     ]
   },
   "beforeAfter": {
@@ -83,9 +110,18 @@
     "address": "Bağcılar Mahallesi, Güzellik Caddesi No:12\nŞişli / İstanbul",
     "hoursTitle": "Çalışma Saatleri",
     "hours": [
-      { "day": "Pazartesi – Cuma", "time": "09:00 – 20:00" },
-      { "day": "Cumartesi",        "time": "10:00 – 18:00" },
-      { "day": "Pazar",            "time": "Kapalı"        }
+      {
+        "day": "Pazartesi – Cuma",
+        "time": "09:00 – 20:00"
+      },
+      {
+        "day": "Cumartesi",
+        "time": "10:00 – 18:00"
+      },
+      {
+        "day": "Pazar",
+        "time": "Kapalı"
+      }
     ],
     "bookBtn": "Randevu Oluştur",
     "copyright": "© 2026 Luxe Beauty. Tüm hakları saklıdır.",
@@ -102,10 +138,25 @@
     "labelEmail": "E-posta",
     "placeholderEmail": "ornek@email.com",
     "labelService": "Hizmet Seçin",
-    "services": ["Protez Tırnak", "Cilt Bakımı", "Kalıcı Makyaj", "Kaş Tasarımı", "Diğer"],
+    "services": [
+      "Protez Tırnak",
+      "Cilt Bakımı",
+      "Kalıcı Makyaj",
+      "Kaş Tasarımı",
+      "Diğer"
+    ],
     "labelDate": "Tarih",
     "labelTime": "Saat",
-    "times": ["09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"],
+    "times": [
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00"
+    ],
     "labelNote": "Notunuz (isteğe bağlı)",
     "placeholderNote": "Özel isteklerinizi veya sorularınızı buraya yazabilirsiniz...",
     "submit": "Randevuyu Onayla",
@@ -113,12 +164,10 @@
     "successText": "En kısa sürede sizinle iletişime geçeceğiz. Luxe Beauty ekibi sizi bekliyor.",
     "successClose": "Kapat",
     "infoTitle": "Neden Luxe Beauty?",
-    "infoItems": [
-      "12+ Yıllık Uzmanlık",
-      "3.000+ Mutlu Müşteri",
-      "%98 Memnuniyet Oranı",
-      "Kişiye Özel Bakım Protokolleri"
-    ],
+    "infoYears": "Yıllık Uzmanlık",
+    "infoClients": "Mutlu Müşteri",
+    "infoSatisfaction": "Memnuniyet Oranı",
+    "infoProtocols": "Kişiye Özel Bakım Protokolleri",
     "infoHours": "Çalışma Saatlerimiz",
     "infoHoursVal": "Pzt–Cum 09:00–20:00\nCmt 10:00–18:00",
     "infoPhone": "+90 500 123 45 67",
@@ -146,5 +195,127 @@
         "a": "Randevu saatinizden en az 24 saat önce arayarak veya WhatsApp üzerinden mesaj atarak randevunuzu iptal edebilir veya erteleyebilirsiniz."
       }
     ]
+  },
+  "pricing": {
+    "title": "Size Uygun Planı Seçin",
+    "subtitle": "Esnek Çözümler",
+    "perMonth": "/ay",
+    "cta": "Hemen Başlayın",
+    "plans": {
+      "basic": {
+        "name": "Basit",
+        "price": "₺1.490",
+        "description": "Yeni başlayan veya küçük ölçekli salonlar için ideal çözüm.",
+        "features": [
+          "Modern & Şık Web Sitesi",
+          "Email ile Randevu Talebi",
+          "Mobil Uyumlu Tasarım",
+          "Temel SEO Optimizasyonu"
+        ]
+      },
+      "pro": {
+        "name": "Orta",
+        "price": "₺2.990",
+        "description": "Büyüyen ve operasyonunu dijitalleştirmek isteyen salonlar için.",
+        "features": [
+          "Gelişmiş Randevu Sistemi",
+          "Admin Yönetim Paneli",
+          "WhatsApp Bildirimleri",
+          "Müşteri Veritabanı (CRM)",
+          "Performans Raporları"
+        ],
+        "tag": "En Popüler"
+      },
+      "ai": {
+        "name": "AI Destekli",
+        "price": "₺5.490",
+        "description": "Teknoloji ile fark yaratmak ve elit hizmet sunmak isteyenlere.",
+        "features": [
+          "AI Destekli Cilt Analizi",
+          "Akıllı Randevu Botu",
+          "Tahminleyici Müşteri Analizi",
+          "Otomatik Sosyal Medya Entegrasyonu",
+          "Öncelikli Teknik Destek"
+        ]
+      }
+    }
+  },
+  "about": {
+    "badge": "Hikayemiz",
+    "title": "Mükemmelliğe Adanmış Yıllar",
+    "storyP1": "Luxe Beauty, güzelliğin sadece dış görünüş değil, içsel bir özgüven meselesi olduğuna inanır. En seçkin ürünler ve dünya standartlarında uzmanlarla, her misafirimize kendini özel hissedeceği benzersiz bir 'kaçış' sunuyoruz.",
+    "storyP2": "Amacımız, doğal güzelliğinizi en lüks ve steril şartlarda ön plana çıkarmaktır.",
+    "stat1Num": "15+",
+    "stat1Label": "Yıllık Ustalık",
+    "stat2Num": "10k+",
+    "stat2Label": "Mutlu Danışan",
+    "stat3Num": "12",
+    "stat3Label": "Sertifikalı Uzman"
+  },
+  "whyUs": {
+    "badge": "Neden Biz",
+    "title": "Güzellikte Lüks Standartı",
+    "f1Title": "Üstün Hijyen",
+    "f1Desc": "Hastane standartlarında sterilizasyon süreçleriyle en güvenli ortamı sağlıyoruz.",
+    "f2Title": "Sertifikalı Uzmanlar",
+    "f2Desc": "Her biri alanında global akademilerden mezun, ödüllü master artistler.",
+    "f3Title": "Premium Ürünler",
+    "f3Desc": "Sadece dermatolojik olarak kanıtlanmış, dünyanın en seçkin lüks markalarını kullanıyoruz."
+  },
+  "ctaBanner": {
+    "title": "Kendinizi Şımartma Vakti",
+    "subtitle": "Bu hafta için sınırlı kontenjanımızdan yerinizi ayırtın ve lüksü deneyimleyin.",
+    "btn": "Randevunu Oluştur"
+  },
+  "team": {
+    "badge": "Uzman Kadromuz",
+    "title": "Sanatın",
+    "titleItalic": "Mimarları",
+    "members": [
+      {
+        "name": "Aylin S.",
+        "role": "Master Artist & Kurucu"
+      },
+      {
+        "name": "Buse K.",
+        "role": "Premium Cilt Uzmanı"
+      },
+      {
+        "name": "Cemre T.",
+        "role": "Kalıcı Makyaj Eğitmeni"
+      }
+    ]
+  },
+  "testimonials": {
+    "badge": "Müşteri Deneyimleri",
+    "title": "Kusursuzluğun",
+    "titleItalic": "Yansımaları",
+    "reviews": [
+      {
+        "name": "Zeynep Y.",
+        "service": "Protez Tırnak",
+        "text": "Luxe Beauty'deki deneyimim inanılmazdı. Kullanılan ürünlerin kalitesi ve ortamın hijyeni gerçekten premium hissettiriyor. Kesinlikle tavsiye ederim."
+      },
+      {
+        "name": "Selin A.",
+        "service": "Cilt Bakımı",
+        "text": "Cilt bakımından sonra cildimdeki parlaklık ve tazelik muazzamdı. Uzmanların ilgisi ve kişiye özel yaklaşımı harika."
+      },
+      {
+        "name": "Esra D.",
+        "service": "Kalıcı Makyaj",
+        "text": "Kaş tasarımı için geldim ve sonuçtan çok memnunum. Tamamen doğal ve tam istediğim gibi oldu. Teşekkürler Luxe Beauty!"
+      }
+    ]
+  },
+  "contact": {
+    "badge": "Bize Ulaşın",
+    "title": "İletişime",
+    "titleItalic": "Geçin",
+    "desc": "Sorularınız veya özel talepleriniz için uzman ekibimize mesaj gönderin. Size en kısa sürede dönüş yapacağız.",
+    "name": "Ad Soyad",
+    "email": "E-posta",
+    "message": "Mesajınız",
+    "btn": "Mesaj Gönder"
   }
 }

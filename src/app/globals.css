@@ -2,17 +2,20 @@
 
 @theme inline {
   /* Brand Colors */
-  --color-gold:          #D4AF37;
-  --color-gold-light:    #E8CC6A;
-  --color-gold-dark:     #A8861A;
-  --color-cream:         #FFFDD0;
-  --color-cream-dark:    #F5F0B0;
-  --color-charcoal:      #333333;
-  --color-charcoal-light:#555555;
-  --color-charcoal-muted:#888888;
+  --color-gold:          #C9A96E;
+  --color-gold-light:    #E2C792;
+  --color-gold-dark:     #A3834D;
+  --color-bg:            #FAF7F2;
+  --color-cream:         #FAF7F2;
+  --color-primary:       #2C1810;
+  --color-espresso:      #2C1810;
+  --color-espresso-light:#4A3025;
+  --color-charcoal:      #2C1810;
+  --color-charcoal-light:#5C4B44;
+  --color-charcoal-muted:#8B7D77;
 
   /* Typography */
-  --font-serif: var(--font-cormorant, "Cormorant Garamond", Georgia, serif);
+  --font-serif: var(--font-playfair, "Playfair Display", Georgia, serif);
   --font-sans:  var(--font-inter, "Inter", system-ui, sans-serif);
 
   /* Spacing / Radius */
@@ -27,8 +30,8 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background-color: var(--color-cream);
-  color: var(--color-charcoal);
+  background-color: var(--color-bg);
+  color: var(--color-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
@@ -108,4 +111,19 @@ body {
   height: 2px;
   background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
   border-radius: 999px;
+}
+
+/* ── Animation: Fade Up ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px); /* Mesafeyi biraz kısalttık daha doğal dursun */
+  transition: opacity 1s cubic-bezier(0.215, 0.61, 0.355, 1), 
+              transform 1s cubic-bezier(0.215, 0.61, 0.355, 1);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+.fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }

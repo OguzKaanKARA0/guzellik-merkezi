@@ -2,23 +2,26 @@
 
 import { MessageCircle } from "lucide-react";
 import { useLocale } from "next-intl";
+import { usePathname } from "next/navigation";
+import { useBooking } from "@/context/BookingContext";
 
 const WHATSAPP_NUMBER = "905001234567"; // Başına 90 ekle, 0 olmadan
 
 export default function WhatsAppButton() {
   const locale = useLocale();
+  const pathname = usePathname();
+  const { openLeadModal } = useBooking();
+
+  // Admin panelinde WhatsApp butonunu gizle
+  if (pathname.includes("/admin")) return null;
 
   const message = locale === "tr"
     ? "Merhaba, Luxe Beauty'den randevu almak istiyorum."
     : "Hello, I would like to book an appointment at Luxe Beauty.";
 
-  const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+    <button
+      onClick={() => openLeadModal("Genel")}
       id="whatsapp-btn"
       aria-label="WhatsApp ile iletişim"
       style={{
@@ -36,6 +39,8 @@ export default function WhatsAppButton() {
         boxShadow:  "0 6px 24px rgba(37,211,102,0.45), 0 2px 8px rgba(0,0,0,0.15)",
         transition: "transform 0.25s ease, box-shadow 0.25s ease",
         textDecoration: "none",
+        border: "none",
+        cursor: "pointer"
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "scale(1.12) translateY(-3px)";
@@ -47,7 +52,6 @@ export default function WhatsAppButton() {
       }}
     >
       <MessageCircle size={26} fill="#fff" style={{ color: "#fff" }} />
-
       {/* Pulse ring animasyonu */}
       <span style={{
         position: "absolute",
@@ -57,7 +61,6 @@ export default function WhatsAppButton() {
         animation: "wa-pulse 2s ease-out infinite",
         pointerEvents: "none",
       }} />
-
       <style>{`
         @keyframes wa-pulse {
           0%   { transform: scale(1);   opacity: 1; }
@@ -65,6 +68,6 @@ export default function WhatsAppButton() {
           100% { transform: scale(1.3); opacity: 0; }
         }
       `}</style>
-    </a>
+    </button>
   );
 }
