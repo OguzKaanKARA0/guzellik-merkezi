@@ -4,6 +4,7 @@ import { routing } from "@/i18n/routing";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -90,10 +91,11 @@ export default async function ServicePage({ params }: Props) {
               </div>
 
               <div style={{ position: "relative", aspectRatio: "4/5", background: "#eee", overflow: "hidden", borderRadius: "1rem" }}>
-                 <img 
+                 <Image 
                    src={`/gallery/service_${slug}.png`} 
                    alt={service.title} 
-                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                   fill
+                   style={{ objectFit: "cover" }}
                  />
               </div>
             </div>

@@ -1,5 +1,6 @@
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { createClient as createPureClient } from "@supabase/supabase-js";
 
 export async function createClient() {
   const cookieStore = await cookies();
@@ -23,5 +24,18 @@ export async function createClient() {
         },
       },
     }
+  );
+}
+
+/**
+ * createAdminClient
+ * @description RLS (Row Level Security) politikalarını bypass eden yetkili istemci.
+ * Çerezlere veya oturum bilgisine ihtiyaç duymaz, doğrudan servis anahtarı ile çalışır.
+ * Sadece güvenli sunucu tarafı işlemlerinde (Server Actions) kullanılmalıdır.
+ */
+export async function createAdminClient() {
+  return createPureClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
 }

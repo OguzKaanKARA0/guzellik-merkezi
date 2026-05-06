@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, Sparkles, Globe } from "lucide-react";
+import { Menu, X, Sparkles, Globe, ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { routing } from "@/i18n/routing";
@@ -11,6 +11,7 @@ export default function Navbar() {
   const t = useTranslations("nav");
   const tServices = useTranslations("services");
   const [open, setOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const { openModal, openServiceDetails } = useBooking();
@@ -242,21 +243,122 @@ export default function Navbar() {
             gap: "1.25rem",
           }}
         >
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              style={{
-                fontSize: "1rem",
-                fontWeight: 500,
-                color: "var(--color-charcoal)",
-                textDecoration: "none",
-              }}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) => {
+            if (l.label === t("services")) {
+              return (
+                <div key={l.href} style={{ display: "flex", flexDirection: "column" }}>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsServicesOpen(!isServicesOpen);
+                    }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      fontSize: "1.1rem",
+                      fontWeight: 600,
+                      color: "var(--color-charcoal)",
+                      background: "none",
+                      border: "none",
+                      padding: "0.5rem 0",
+                      cursor: "pointer",
+                      width: "100%",
+                      fontFamily: "var(--font-sans)"
+                    }}
+                  >
+                    {l.label}
+                    <ChevronDown 
+                      size={18} 
+                      style={{ 
+                        transform: isServicesOpen ? "rotate(180deg)" : "rotate(0deg)", 
+                        transition: "transform 0.3s ease",
+                        color: "var(--color-gold)"
+                      }} 
+                    />
+                  </button>
+                  
+                  <div style={{
+                    maxHeight: isServicesOpen ? "500px" : "0",
+                    overflow: "hidden",
+                    transition: "max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease",
+                    opacity: isServicesOpen ? 1 : 0,
+                    display: "flex",
+                    flexDirection: "column",
+                    paddingLeft: "1rem",
+                    borderLeft: "1px solid rgba(201, 169, 110, 0.2)",
+                    marginTop: isServicesOpen ? "0.5rem" : "0",
+                    gap: "0.5rem"
+                  }}>
+                    {[
+                      { id: "hair", label: tServices("hair") },
+                      { id: "skin", label: tServices("skin") },
+                      { id: "makeup", label: tServices("makeup") },
+                      { id: "nails", label: tServices("nails") },
+                      { id: "brows", label: tServices("brows") },
+                      { id: "permanent", label: tServices("permanent") }
+                    ].map(svc => (
+                      <button
+                        key={svc.id}
+                        onClick={() => {
+                          setOpen(false);
+                          setIsServicesOpen(false);
+                          openServiceDetails(svc.id);
+                        }}
+                        style={{
+                          textAlign: "left",
+                          padding: "0.75rem 0",
+                          fontSize: "0.95rem",
+                          color: "var(--color-charcoal-light)",
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          fontFamily: "var(--font-sans)"
+                        }}
+                      >
+                        {svc.label}
+                      </button>
+                    ))}
+                    <a
+                      href={`/${currentLocale}#hizmetler`}
+                      onClick={() => {
+                        setOpen(false);
+                        setIsServicesOpen(false);
+                      }}
+                      style={{
+                        padding: "0.75rem 0",
+                        fontSize: "0.9rem",
+                        fontWeight: 600,
+                        color: "var(--color-gold)",
+                        textDecoration: "none",
+                        fontFamily: "var(--font-sans)",
+                        borderTop: "0.5px solid rgba(201, 169, 110, 0.1)",
+                        marginTop: "0.5rem"
+                      }}
+                    >
+                      {currentLocale === "tr" ? "Tüm Hizmetler" : "All Services"}
+                    </a>
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                style={{
+                  fontSize: "1.1rem",
+                  fontWeight: 600,
+                  color: "var(--color-charcoal)",
+                  textDecoration: "none",
+                  padding: "0.5rem 0"
+                }}
+              >
+                {l.label}
+              </a>
+            );
+          })}
 
           <div
             style={{

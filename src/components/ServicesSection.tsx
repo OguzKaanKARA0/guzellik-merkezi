@@ -69,25 +69,26 @@ function ServiceCard({
   const [hovered, setHovered] = useState(false);
   const { openServiceDetails, openLeadModal } = useBooking();
 
-  const phoneNumber = "905001234567";
-  const whatsappText = `Merhaba, ${title} hizmetiniz hakkında bilgi ve size özel fiyat teklifi almak istiyorum.`;
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappText)}`;
-
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={() => openServiceDetails(svc.id)}
+      onClick={() => {
+        console.log("[ServicesSection] Opening details for:", svc.id);
+        openServiceDetails(svc.id);
+      }}
       style={{
         position: "relative",
-        borderRadius: "0", // European minimalist look often uses sharp or very slight rounded edges. Let's use 0 or slight.
+        borderRadius: "0.5rem",
         overflow: "hidden",
         cursor: "pointer",
         aspectRatio: "3/4",
         border: "0.5px solid rgba(201, 169, 110, 0.2)",
         transition: "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-        boxShadow: hovered ? "0 20px 48px rgba(201,169,110,0.15)" : "none",
+        boxShadow: hovered ? "0 20px 48px rgba(201,169,110,0.2)" : "none",
         transform: hovered ? "scale(1.02)" : "scale(1)",
+        touchAction: "manipulation",
+        zIndex: 1
       }}
     >
       {/* Background Image */}

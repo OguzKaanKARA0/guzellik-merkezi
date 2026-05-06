@@ -3,6 +3,14 @@
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 
+/**
+ * createLead
+ * @description Yeni bir potansiyel müşteri (lead) kaydı oluşturur. 
+ * Bu fonksiyon, Supabase CRM entegrasyonunun temelini oluşturur.
+ * RLS (Row Level Security) politikalarına tam uyumludur; anonim kullanıcılara 
+ * sadece INSERT izni verildiği senaryolarda güvenli bir şekilde çalışır.
+ * Sunucu tarafında (Server Actions) çalıştığı için veri güvenliğini garanti eder.
+ */
 export async function createLead(name: string, phone: string, service: string | null) {
   console.log("[createLead] İşlem başlatıldı:", { name, phone, service });
 

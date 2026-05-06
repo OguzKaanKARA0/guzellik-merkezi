@@ -78,7 +78,6 @@ export default function OfferModal() {
     if (result.success) {
       setShowSuccess(true);
       
-      // 2 saniye sonra yönlendir
       setTimeout(() => {
         closeLeadModal();
         const message = `Merhaba, ben ${name}. ${selectedService || leadService ? (selectedService || leadService) + " hizmetiniz " : ""}için özel teklif almak istiyorum.`;
@@ -100,209 +99,366 @@ export default function OfferModal() {
 
   return (
     <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "rgba(20, 18, 14, 0.85)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        opacity: visible ? 1 : 0,
-        visibility: visible ? "visible" : "hidden",
-        transition: "opacity 0.5s ease, visibility 0.5s ease",
-        padding: "1.5rem"
-      }}
+      className={`modal-overlay ${visible ? "visible" : ""}`}
       onClick={closeLeadModal}
     >
       <div
-        style={{
-          width: "100%",
-          maxWidth: "460px",
-          backgroundColor: "var(--color-bg)",
-          borderRadius: "0.5rem",
-          overflow: "hidden",
-          boxShadow: "0 30px 60px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(201, 169, 110, 0.2)",
-          display: "flex",
-          flexDirection: "column",
-          transform: visible ? "scale(1) translateY(0)" : "scale(0.95) translateY(30px)",
-          transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
-          position: "relative",
-          padding: "3.5rem 2.5rem",
-          border: "0.5px solid rgba(201, 169, 110, 0.3)"
-        }}
+        className={`modal-container ${visible ? "animate-in" : ""}`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Decorative corner element */}
-        <div style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "4px", background: "linear-gradient(to right, var(--color-gold-dark), var(--color-gold), var(--color-gold-light))" }} />
+        {/* Decorative Top Border */}
+        <div className="modal-accent" />
 
         <button
+          className="modal-close"
           onClick={closeLeadModal}
-          style={{
-            position: "absolute",
-            top: "1.5rem",
-            right: "1.5rem",
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            color: "var(--color-charcoal-muted)",
-            transition: "all 0.3s ease",
-            padding: "0.5rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = "var(--color-gold)"; e.currentTarget.style.transform = "rotate(90deg)" }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = "var(--color-charcoal-muted)"; e.currentTarget.style.transform = "rotate(0deg)" }}
           aria-label="Kapat"
         >
-          <X size={26} strokeWidth={1.2} />
+          <X size={22} strokeWidth={1.5} />
         </button>
 
         {showSuccess ? (
-          <div style={{ textAlign: "center", padding: "2rem 0", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem" }}>
-            <div style={{ width: "80px", height: "80px", borderRadius: "50%", background: "var(--color-gold)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 10px 30px rgba(201, 169, 110, 0.4)" }}>
-              <Check size={40} color="#fff" strokeWidth={3} />
+          <div className="success-content">
+            <div className="success-icon">
+              <Check size={32} color="#fff" strokeWidth={3} />
             </div>
-            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "2rem", color: "var(--color-primary)", margin: 0 }}>Talebiniz Kaydedildi</h2>
-            <p style={{ color: "var(--color-charcoal-muted)", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              Bilgileriniz başarıyla alındı. <br /> WhatsApp'a yönlendiriliyorsunuz...
+            <h2 className="serif-title">Talebiniz Kaydedildi</h2>
+            <p className="success-desc">
+              Bilgileriniz başarıyla alındı. <br /> WhatsApp&apos;a yönlendiriliyorsunuz...
             </p>
             <Loader2 className="spin" size={24} style={{ color: "var(--color-gold)", marginTop: "1rem" }} />
           </div>
         ) : (
           <>
-            <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-              <div style={{ display: "inline-flex", padding: "1rem", borderRadius: "50%", backgroundColor: "rgba(201, 169, 110, 0.1)", color: "var(--color-gold)", marginBottom: "1.5rem" }}>
-                <MessageCircle size={32} strokeWidth={1.5} />
+            <div className="modal-header">
+              <div className="icon-badge">
+                <MessageCircle size={28} strokeWidth={1.2} />
               </div>
-              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "2.25rem", color: "var(--color-primary)", margin: "0 0 0.75rem 0", fontWeight: 400, letterSpacing: "-0.02em" }}>
-                Size Özel Teklif
-              </h2>
-              <p style={{ fontFamily: "var(--font-sans)", fontSize: "1rem", color: "var(--color-charcoal-muted)", margin: 0, lineHeight: 1.6, fontWeight: 300 }}>
-                Lütfen bilgilerinizi bırakın. Uzmanlarımız {selectedService || leadService ? <span style={{ color: "var(--color-gold)", fontWeight: 500 }}>{selectedService || leadService}</span> : "hizmetlerimiz"} için size en uygun teklifi hazırlasın.
+              <h2 className="serif-title">Size Özel Teklif</h2>
+              <p className="header-desc">
+                Lütfen bilgilerinizi bırakın. Uzmanlarımız {selectedService || leadService ? <span className="gold-text">{selectedService || leadService}</span> : "hizmetlerimiz"} için size en uygun teklifi hazırlasın.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                <label style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--color-gold-dark)", textTransform: "uppercase", letterSpacing: "0.15em" }}>Ad Soyad</label>
+            <form onSubmit={handleSubmit} className="offer-form">
+              <div className="input-group">
+                <label className="input-label">Ad Soyad</label>
                 <input
                   type="text"
                   required
                   value={name}
                   onChange={(e) => { setName(e.target.value); setErrors(prev => ({ ...prev, name: undefined })); }}
-                  placeholder="Adınızı ve soyadınızı giriniz"
-                  style={{
-                    width: "100%",
-                    padding: "1rem 1.25rem",
-                    borderRadius: "0",
-                    border: errors.name ? "1px solid #ef4444" : "1px solid rgba(201, 169, 110, 0.2)",
-                    backgroundColor: "rgba(255, 255, 255, 0.5)",
-                    fontSize: "1rem",
-                    color: "var(--color-charcoal)",
-                    outline: "none",
-                    fontFamily: "var(--font-sans)",
-                    transition: "all 0.3s ease"
-                  }}
-                  onFocus={(e) => { e.currentTarget.style.borderColor = "var(--color-gold)"; e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(201, 169, 110, 0.1)"; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = errors.name ? "#ef4444" : "rgba(201, 169, 110, 0.2)"; e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.5)"; e.currentTarget.style.boxShadow = "none"; }}
+                  placeholder="Adınızı giriniz"
+                  className={`styled-input ${errors.name ? "error" : ""}`}
                 />
-                {errors.name && <span style={{ fontSize: "0.75rem", color: "#ef4444", marginTop: "0.2rem" }}>{errors.name}</span>}
+                {errors.name && <span className="error-text">{errors.name}</span>}
               </div>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                <label style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--color-gold-dark)", textTransform: "uppercase", letterSpacing: "0.15em" }}>Telefon Numarası</label>
+              <div className="input-group">
+                <label className="input-label">Telefon Numarası</label>
                 <input
                   type="tel"
                   required
                   value={phone}
                   onChange={(e) => { setPhone(e.target.value); setErrors(prev => ({ ...prev, phone: undefined })); }}
                   placeholder="05XX XXX XX XX"
-                  style={{
-                    width: "100%",
-                    padding: "1rem 1.25rem",
-                    borderRadius: "0",
-                    border: errors.phone ? "1px solid #ef4444" : "1px solid rgba(201, 169, 110, 0.2)",
-                    backgroundColor: "rgba(255, 255, 255, 0.5)",
-                    fontSize: "1rem",
-                    color: "var(--color-charcoal)",
-                    outline: "none",
-                    fontFamily: "var(--font-sans)",
-                    transition: "all 0.3s ease"
-                  }}
-                  onFocus={(e) => { e.currentTarget.style.borderColor = "var(--color-gold)"; e.currentTarget.style.backgroundColor = "#fff"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(201, 169, 110, 0.1)"; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = errors.phone ? "#ef4444" : "rgba(201, 169, 110, 0.2)"; e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.5)"; e.currentTarget.style.boxShadow = "none"; }}
+                  className={`styled-input ${errors.phone ? "error" : ""}`}
                 />
-                {errors.phone && <span style={{ fontSize: "0.75rem", color: "#ef4444", marginTop: "0.2rem" }}>{errors.phone}</span>}
+                {errors.phone && <span className="error-text">{errors.phone}</span>}
               </div>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                <label style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--color-gold-dark)", textTransform: "uppercase", letterSpacing: "0.15em" }}>Hizmet Seçimi</label>
-                <div style={{ position: "relative" }}>
+              <div className="input-group">
+                <label className="input-label">Hizmet Seçimi</label>
+                <div className="select-wrapper">
                   <select
                     value={selectedService}
                     onChange={(e) => setSelectedService(e.target.value)}
-                    style={{
-                      width: "100%",
-                      padding: "1rem 1.25rem",
-                      borderRadius: "0",
-                      border: "1px solid rgba(201, 169, 110, 0.2)",
-                      backgroundColor: "rgba(255, 255, 255, 0.5)",
-                      fontSize: "1rem",
-                      color: "var(--color-charcoal)",
-                      outline: "none",
-                      appearance: "none",
-                      cursor: "pointer",
-                      transition: "all 0.3s ease"
-                    }}
+                    className="styled-select"
                   >
                     <option value="">Hizmet Seçiniz</option>
                     {services.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
-                  <ChevronDown size={18} style={{ position: "absolute", right: "1rem", top: "50%", transform: "translateY(-50%)", color: "var(--color-gold)", pointerEvents: "none" }} />
+                  <ChevronDown size={18} className="select-icon" />
                 </div>
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="btn-gold"
-                style={{ 
-                  marginTop: "1.5rem", 
-                  padding: "1.2rem", 
-                  fontSize: "0.9rem", 
-                  width: "100%", 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  alignItems: "center", 
-                  gap: "0.75rem",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  fontWeight: 600,
-                  opacity: loading ? 0.7 : 1,
-                  cursor: loading ? "not-allowed" : "pointer"
-                }}
+                className="submit-btn"
               >
                 {loading ? <Loader2 className="spin" size={20} /> : (
                   <>
-                    Talebi Gönder & WP'ye Geç <ArrowRight size={20} />
+                    Talebi Gönder <ArrowRight size={18} />
                   </>
                 )}
               </button>
             </form>
+
+            <p className="disclaimer">
+              Verileriniz KVKK kapsamında korunmaktadır.
+            </p>
           </>
         )}
-
-        <p style={{ marginTop: "2rem", textAlign: "center", fontSize: "0.75rem", color: "var(--color-charcoal-muted)", fontWeight: 300 }}>
-          Bilgileriniz güvenle saklanır ve sadece teklif hazırlamak için kullanılır.
-        </p>
       </div>
+
       <style>{`
+        .modal-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: rgba(20, 18, 14, 0.7);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.4s ease;
+          padding: 1.5rem;
+        }
+        .modal-overlay.visible {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .modal-container {
+          width: 100%;
+          max-width: 420px;
+          background-color: var(--color-bg);
+          border-radius: 1.5rem;
+          overflow: hidden;
+          box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 169, 110, 0.1);
+          display: flex;
+          flex-direction: column;
+          transform: scale(0.95) translateY(30px);
+          transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+          position: relative;
+          padding: 3rem 2rem;
+          border: 0.5px solid rgba(201, 169, 110, 0.2);
+        }
+        .modal-container.animate-in {
+          transform: scale(1) translateY(0);
+        }
+
+        .modal-accent {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: linear-gradient(to right, var(--color-gold-dark), var(--color-gold), var(--color-gold-light));
+        }
+
+        .modal-close {
+          position: absolute;
+          top: 1.25rem;
+          right: 1.25rem;
+          background: rgba(201, 169, 110, 0.05);
+          border: 1px solid rgba(201, 169, 110, 0.1);
+          border-radius: 50%;
+          width: 38px;
+          height: 38px;
+          cursor: pointer;
+          color: var(--color-charcoal-muted);
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .modal-close:hover {
+          background: rgba(201, 169, 110, 0.15);
+          color: var(--color-primary);
+          transform: rotate(90deg);
+        }
+
+        .success-content {
+          text-align: center;
+          padding: 1rem 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1.25rem;
+        }
+        .success-icon {
+          width: 64px;
+          height: 64px;
+          border-radius: 50%;
+          background: var(--color-gold);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 10px 25px rgba(201, 169, 110, 0.3);
+        }
+        .success-desc {
+          color: var(--color-charcoal-muted);
+          font-size: 0.95rem;
+          line-height: 1.6;
+        }
+
+        .modal-header {
+          text-align: center;
+          marginBottom: 2rem;
+        }
+        .icon-badge {
+          display: inline-flex;
+          padding: 0.85rem;
+          border-radius: 50%;
+          background-color: rgba(201, 169, 110, 0.08);
+          color: var(--color-gold);
+          margin-bottom: 1.25rem;
+        }
+        .serif-title {
+          font-family: var(--font-serif);
+          font-size: 1.75rem;
+          color: var(--color-primary);
+          margin: 0 0 0.5rem 0;
+          font-weight: 400;
+          letter-spacing: -0.01em;
+        }
+        .header-desc {
+          font-family: var(--font-sans);
+          font-size: 0.9rem;
+          color: var(--color-charcoal-muted);
+          margin: 0;
+          line-height: 1.6;
+          font-weight: 300;
+        }
+        .gold-text {
+          color: var(--color-gold-dark);
+          font-weight: 500;
+        }
+
+        .offer-form {
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+          margin-top: 2rem;
+        }
+        .input-group {
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+        }
+        .input-label {
+          font-size: 0.65rem;
+          font-weight: 700;
+          color: var(--color-gold-dark);
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          padding-left: 0.2rem;
+        }
+        .styled-input, .styled-select {
+          width: 100%;
+          min-height: 48px;
+          padding: 0 1.25rem;
+          border-radius: 0.75rem;
+          border: 1px solid rgba(201, 169, 110, 0.2);
+          background-color: #fff;
+          font-size: 0.95rem;
+          color: var(--color-charcoal);
+          outline: none;
+          font-family: var(--font-sans);
+          transition: all 0.3s ease;
+        }
+        .styled-input:focus, .styled-select:focus {
+          border-color: var(--color-gold);
+          box-shadow: 0 4px 15px rgba(201, 169, 110, 0.12);
+        }
+        .styled-input.error {
+          border-color: #ef4444;
+        }
+        .error-text {
+          font-size: 0.7rem;
+          color: #ef4444;
+          padding-left: 0.2rem;
+        }
+
+        .select-wrapper {
+          position: relative;
+        }
+        .styled-select {
+          appearance: none;
+          cursor: pointer;
+        }
+        .select-icon {
+          position: absolute;
+          right: 1rem;
+          top: 50%;
+          transform: translateY(-50%);
+          color: var(--color-gold);
+          pointer-events: none;
+        }
+
+        .submit-btn {
+          margin-top: 0.75rem;
+          min-height: 52px;
+          padding: 0 1.5rem;
+          font-size: 0.85rem;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.75rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          font-weight: 700;
+          background: var(--color-gold);
+          color: #fff;
+          border: none;
+          border-radius: 0.75rem;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 8px 20px rgba(201, 169, 110, 0.25);
+        }
+        .submit-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 12px 25px rgba(201, 169, 110, 0.35);
+          background: var(--color-gold-dark);
+        }
+        .submit-btn:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+          transform: none;
+        }
+
+        .disclaimer {
+          margin-top: 1.75rem;
+          text-align: center;
+          font-size: 0.7rem;
+          color: var(--color-charcoal-muted);
+          font-weight: 300;
+        }
+
         .spin { animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        @media (max-width: 768px) {
+          .modal-overlay {
+            padding: 0;
+            align-items: flex-end;
+          }
+          .modal-container {
+            max-width: 100%;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            padding: 2.5rem 1.5rem 3.5rem;
+            transform: translateY(100%);
+          }
+          .modal-container.animate-in {
+            transform: translateY(0);
+          }
+          .serif-title {
+            font-size: 1.5rem;
+          }
+          .header-desc {
+            font-size: 0.85rem;
+          }
+          .styled-input, .styled-select {
+            font-size: 0.9rem;
+          }
+        }
       `}</style>
     </div>
   );

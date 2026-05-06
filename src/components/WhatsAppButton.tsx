@@ -5,19 +5,12 @@ import { useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useBooking } from "@/context/BookingContext";
 
-const WHATSAPP_NUMBER = "905001234567"; // Başına 90 ekle, 0 olmadan
-
 export default function WhatsAppButton() {
-  const locale = useLocale();
   const pathname = usePathname();
   const { openLeadModal } = useBooking();
 
   // Admin panelinde WhatsApp butonunu gizle
   if (pathname.includes("/admin")) return null;
-
-  const message = locale === "tr"
-    ? "Merhaba, Luxe Beauty'den randevu almak istiyorum."
-    : "Hello, I would like to book an appointment at Luxe Beauty.";
 
   return (
     <button

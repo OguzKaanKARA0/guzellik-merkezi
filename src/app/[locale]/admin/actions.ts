@@ -1,18 +1,25 @@
 "use server";
 
-import { createClient } from "@supabase/supabase-js";
+import { createAdminClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-// Admin işlemleri için RLS'yi bypass eden yetkili istemci
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+/**
+ * Admin Actions Bundle
+ * @description Bu dosya, Luxe Beauty CRM'in yönetimsel operasyonlarını (Update/Delete/Create) içerir.
+ * Güvenlik Mimarisi:
+ * - Admin işlemleri, sunucu tarafında (Server Actions) 'supabaseAdmin' istemcisi ile yürütülür.
+ * - 'supabaseAdmin', veritabanı RLS (Row Level Security) politikalarını bypass eden 
+ *   'service_role' anahtarını kullanır. Bu, yöneticiye tam yetki sağlar.
+ * - Tüm işlemlerden sonra 'revalidatePath' ile UI senkronizasyonu anında gerçekleştirilir.
+ */
+ 
+
 
 export async function updateBookingStatus(id: string, newStatus: "approved" | "cancelled") {
   console.log(`[admin-action] Durum güncelleniyor: ${id} -> ${newStatus}`);
   try {
+    const supabaseAdmin = await createAdminClient();
     const { data, error } = await supabaseAdmin
       .from("bookings")
       .update({ status: newStatus })
@@ -22,6 +29,11 @@ export async function updateBookingStatus(id: string, newStatus: "approved" | "c
     if (error) {
       console.error("[admin-action] Güncelleme hatası:", error);
       return { success: false, error: error.message };
+    }
+
+    if (!data || data.length === 0) {
+      console.error("[admin-action] GÜNCELLEME BAŞARISIZ: Bu ID ile bir kayıt bulunamadı ->", id);
+      return { success: false, error: "Güncellenecek kayıt bulunamadı. (ID Mismatch)" };
     }
 
     console.log("[admin-action] Güncelleme başarılı:", data);
@@ -37,6 +49,7 @@ export async function updateBookingStatus(id: string, newStatus: "approved" | "c
 export async function deleteBooking(id: string) {
   console.log(`[admin-action] Rezervasyon siliniyor: ${id}`);
   try {
+    const supabaseAdmin = await createAdminClient();
     const { data, error } = await supabaseAdmin
       .from("bookings")
       .delete()
@@ -46,6 +59,11 @@ export async function deleteBooking(id: string) {
     if (error) {
       console.error("[admin-action] Silme hatası (booking):", error);
       return { success: false, error: error.message };
+    }
+
+    if (!data || data.length === 0) {
+      console.error("[admin-action] SİLME BAŞARISIZ: Bu ID ile bir kayıt bulunamadı ->", id);
+      return { success: false, error: "Silinecek kayıt bulunamadı. (ID Mismatch)" };
     }
 
     console.log("[admin-action] Silme başarılı (booking):", data);
@@ -61,6 +79,7 @@ export async function deleteBooking(id: string) {
 export async function deleteLead(id: string) {
   console.log(`[admin-action] Lead siliniyor: ${id}`);
   try {
+    const supabaseAdmin = await createAdminClient();
     const { data, error } = await supabaseAdmin
       .from("leads")
       .delete()
@@ -70,6 +89,11 @@ export async function deleteLead(id: string) {
     if (error) {
       console.error("[admin-action] Silme hatası (lead):", error);
       return { success: false, error: error.message };
+    }
+
+    if (!data || data.length === 0) {
+      console.error("[admin-action] SİLME BAŞARISIZ: Bu ID ile bir lead kaydı bulunamadı ->", id);
+      return { success: false, error: "Silinecek talep bulunamadı. (ID Mismatch)" };
     }
 
     console.log("[admin-action] Silme başarılı (lead):", data);
@@ -93,6 +117,7 @@ export async function createManualBooking(data: {
 }) {
   console.log("[admin-action] Manuel rezervasyon ekleniyor:", data);
   try {
+    const supabaseAdmin = await createAdminClient();
     const { error } = await supabaseAdmin.from("bookings").insert([{
       ...data,
       status: "approved"
@@ -120,6 +145,7 @@ export async function createManualLead(data: {
 }) {
   console.log("[admin-action] Manuel lead ekleniyor:", data);
   try {
+    const supabaseAdmin = await createAdminClient();
     const { error } = await supabaseAdmin.from("leads").insert([data]);
 
     if (error) {

@@ -133,7 +133,7 @@ export default function TestimonialsSection() {
                 </div>
                 
                 <p style={{ fontFamily: "var(--font-serif)", fontSize: "1.25rem", lineHeight: 1.8, color: "var(--color-charcoal-light)", margin: 0, fontStyle: "italic", maxWidth: "80%" }}>
-                  "{review.text}"
+                  &quot;{review.text}&quot;
                 </p>
                 
                 <div style={{ marginTop: "1rem" }}>
