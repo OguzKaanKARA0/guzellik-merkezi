@@ -76,21 +76,17 @@
     }
   },
   "gallery": {
-    "eyebrow": "Portfolyomuz",
-    "title": "Çalışmalarımız",
+    "eyebrow": "GALERİ",
+    "title": "İşlerimizden",
+    "titleItalic": "Kareler",
+    "subtitle": "Stüdyomuzdan anlar ve müşterilerimizle paylaştığımız sonuçlar.",
     "items": [
-      {
-        "label": "Protez Tırnak"
-      },
-      {
-        "label": "Cilt Bakımı"
-      },
-      {
-        "label": "Kaş Tasarımı"
-      },
-      {
-        "label": "Kalıcı Makyaj"
-      }
+      { "label": "Saç Tasarımı" },
+      { "label": "Cilt Bakımı" },
+      { "label": "El Bakımı" },
+      { "label": "Makyaj Tasarımı" },
+      { "label": "Microblading" },
+      { "label": "Makyaj Seti" }
     ]
   },
   "beforeAfter": {

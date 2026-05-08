@@ -2,14 +2,11 @@ import Navbar            from "@/components/Navbar";
 import HeroSection        from "@/components/HeroSection";
 import AboutSection       from "@/components/AboutSection";
 import ServicesSection    from "@/components/ServicesSection";
-import TeamSection        from "@/components/TeamSection";
 import WhyUsSection       from "@/components/WhyUsSection";
 import GallerySection     from "@/components/GallerySection";
-import BeforeAfterSection from "@/components/BeforeAfterSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import PricingSection     from "@/components/PricingSection";
 import FaqSection         from "@/components/FaqSection";
-import CtaBanner          from "@/components/CtaBanner";
+import ContactSection    from "@/components/ContactSection";
 import Footer             from "@/components/Footer";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -37,14 +34,11 @@ export default async function Home({ params }: Props) {
         <HeroSection />
         <AboutSection />
         <ServicesSection />
-        <TeamSection />
         <WhyUsSection />
         <GallerySection />
-        <BeforeAfterSection />
         <TestimonialsSection />
-        <PricingSection />
         <FaqSection />
-        <CtaBanner />
+        <ContactSection />
       </main>
       <Footer />
     </>
