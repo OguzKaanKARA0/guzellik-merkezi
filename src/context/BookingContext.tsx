@@ -33,7 +33,6 @@ export function BookingProvider({ children }: { children: ReactNode }) {
   const [serviceDetailsId, setServiceDetailsId] = useState<string | null>(null);
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadService, setLeadService] = useState<string | null>(null);
-
   const openModal  = useCallback(() => setIsOpen(true),  []);
   const closeModal = useCallback(() => setIsOpen(false), []);
   const openServiceDetails = useCallback((id: string) => setServiceDetailsId(id), []);
@@ -49,10 +48,10 @@ export function BookingProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <BookingContext.Provider value={{ 
-      isOpen, openModal, closeModal, 
+    <BookingContext.Provider value={{
+      isOpen, openModal, closeModal,
       serviceDetailsId, openServiceDetails, closeServiceDetails,
-      isLeadModalOpen, leadService, openLeadModal, closeLeadModal
+      isLeadModalOpen, leadService, openLeadModal, closeLeadModal,
     }}>
       {children}
     </BookingContext.Provider>

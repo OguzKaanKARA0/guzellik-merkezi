@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { useBooking } from "@/context/BookingContext";
+import { useFeature } from "@/hooks/useFeature";
 
 export default function Navbar() {
   const t = useTranslations("nav");
@@ -15,6 +16,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { openModal, openServiceDetails } = useBooking();
+  const { value: canBook, loading: bookingLoading } = useFeature('booking');
 
   const currentLocale =
     routing.locales.find((l) => pathname.startsWith(`/${l}`)) ??
@@ -210,7 +212,9 @@ export default function Navbar() {
             className="btn-gold"
             style={{ padding: "0.6rem 1.5rem", fontSize: "0.8rem", whiteSpace: "nowrap", flexShrink: 0, cursor: "pointer", border: "none" }}
           >
-            {t("bookBtn")}
+            {bookingLoading
+              ? <span style={{ display: "inline-block", width: "60px", height: "0.85em", background: "rgba(255,255,255,0.4)", borderRadius: "3px", verticalAlign: "middle" }} />
+              : canBook ? t("bookBtn") : "Teklif Al"}
           </button>
         </div>
 
@@ -387,7 +391,9 @@ export default function Navbar() {
             className="btn-gold"
             style={{ textAlign: "center", cursor: "pointer", border: "none", width: "100%" }}
           >
-            {t("bookBtn")}
+            {bookingLoading
+              ? <span style={{ display: "inline-block", width: "60px", height: "0.85em", background: "rgba(255,255,255,0.4)", borderRadius: "3px", verticalAlign: "middle" }} />
+              : canBook ? t("bookBtn") : "Teklif Al"}
           </button>
         </div>
       )}

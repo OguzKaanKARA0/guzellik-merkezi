@@ -5,11 +5,14 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useBooking } from "@/context/BookingContext";
+import { useFeature } from "@/hooks/useFeature";
 import Image from "next/image";
 
 export default function HeroSection() {
   const t = useTranslations("hero");
   const { openModal } = useBooking();
+  const canBook = useFeature('booking');
+  const bookingReady = !canBook.loading;
   const words = t.raw("titleWords") as string[];
   const [wordIndex, setWordIndex] = useState(0);
 
@@ -154,9 +157,11 @@ export default function HeroSection() {
         <button
           onClick={openModal}
           className="btn-gold"
-          style={{ marginTop: "1rem", fontSize: "0.95rem", padding: "1rem 3.5rem" }}
+          style={{ marginTop: "1rem", fontSize: "0.95rem", padding: "1rem 3.5rem", minWidth: "220px" }}
         >
-          {t("ctaPrimary")}
+          {!bookingReady
+            ? <span style={{ display: "inline-block", width: "120px", height: "1em", background: "rgba(255,255,255,0.3)", borderRadius: "4px" }} />
+            : canBook.value ? t("ctaPrimary") : "Teklif Talebi Oluştur"}
           <ArrowRight size={18} />
         </button>
       </div>

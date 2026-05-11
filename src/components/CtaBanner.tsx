@@ -2,11 +2,13 @@
 
 import { useTranslations } from "next-intl";
 import { useBooking } from "@/context/BookingContext";
+import { useFeature } from "@/hooks/useFeature";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 export default function CtaBanner() {
   const t = useTranslations("ctaBanner");
   const { openModal } = useBooking();
+  const { value: canBook, loading: bookingLoading } = useFeature('booking');
   const { ref, isIntersecting } = useIntersectionObserver({ threshold: 0.2 });
 
   return (
@@ -48,7 +50,9 @@ export default function CtaBanner() {
           className="btn-gold"
           style={{ position: "relative", zIndex: 1, padding: "1.2rem 3rem", fontSize: "0.95rem" }}
         >
-          {t("btn")}
+          {bookingLoading
+            ? <span style={{ display: "inline-block", width: "120px", height: "1em", background: "rgba(255,255,255,0.3)", borderRadius: "4px" }} />
+            : canBook ? t("btn") : "Teklif Talebi Oluştur"}
         </button>
       </div>
     </section>

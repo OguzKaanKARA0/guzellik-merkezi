@@ -3,10 +3,12 @@
 import { MapPin, Phone, Mail, Clock, ArrowRight, Gift } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useBooking } from "@/context/BookingContext";
+import { useFeature } from "@/hooks/useFeature";
 
 export default function ContactSection() {
   const t = useTranslations("footer");
   const { openModal, openLeadModal } = useBooking();
+  const { value: canBook, loading: bookingLoading } = useFeature('booking');
 
   const contactInfo = [
     {
@@ -60,7 +62,9 @@ export default function ContactSection() {
               İletişim bilgilerimiz
             </span>
             <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "2.5rem", color: "var(--color-primary)", margin: 0, fontWeight: 400 }}>
-              Randevu için bize ulaşın
+              {bookingLoading
+                ? <span style={{ display: "inline-block", width: "260px", height: "1.2em", background: "#f0ece8", borderRadius: "6px" }} />
+                : canBook ? "Randevu için bize ulaşın" : "Size özel teklif alın"}
             </h2>
           </div>
 
@@ -140,7 +144,9 @@ export default function ContactSection() {
               onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(201, 169, 110, 0.05)")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
             >
-              RANDEVU AL
+              {bookingLoading
+                ? <span style={{ display: "inline-block", width: "100px", height: "1em", background: "rgba(255,255,255,0.5)", borderRadius: "4px" }} />
+                : canBook ? "RANDEVU AL" : "TEKLİF TALEBİ OLUŞTUR"}
               <ArrowRight size={18} />
             </button>
           </div>

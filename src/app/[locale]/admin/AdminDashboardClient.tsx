@@ -1,9 +1,10 @@
-﻿"use client";
+"use client";
 
 import { useState, useTransition, useEffect, useRef, useCallback } from "react";
 import { updateBookingStatus, deleteBooking, deleteLead, createManualBooking, createManualLead } from "@/app/[locale]/admin/actions";
 import { createClient } from "@/utils/supabase/client";
 import { Check, X, Clock, Loader2, Trash2, Plus, Bell } from "lucide-react";
+import { useFeature } from "@/hooks/useFeature";
 
 type Booking = {
   id: string;
@@ -41,6 +42,8 @@ export function AdminDashboardClient({
   initialBookings: Booking[];
   initialLeads: Lead[];
 }) {
+  const { value: canAdmin, loading: featureLoading } = useFeature('admin_panel')
+
   const [activeTab, setActiveTab] = useState<"bookings" | "leads">("bookings");
   const [isPending, startTransition] = useTransition();
   const [loadingId, setLoadingId] = useState<string | null>(null);
@@ -164,6 +167,33 @@ export function AdminDashboardClient({
         return <span style={{ padding: "0.4rem 0.8rem", background: "#fef9c3", color: "#854d0e", borderRadius: "99px", fontSize: "0.75rem", fontWeight: 700, display: "inline-flex", alignItems: "center", gap: "0.4rem" }}><Clock size={12} /> Bekliyor</span>;
     }
   };
+
+  // Plan yükleniyor — flash engellemek için spinner göster
+  if (featureLoading) {
+    return (
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "60vh" }}>
+        <div style={{
+          width: "36px", height: "36px", borderRadius: "9999px",
+          border: "3px solid var(--color-gold)",
+          borderTopColor: "transparent",
+          animation: "admin-spin 0.75s linear infinite",
+        }} />
+        <style>{`@keyframes admin-spin { to { transform: rotate(360deg); } }`}</style>
+      </div>
+    )
+  }
+
+  if (!canAdmin) {
+    console.log('[Admin] GUARD: canAdmin=false, basic ekranı gösteriliyor')
+    return (
+      <div>
+        <p>Bu özellik Basic pakette bulunmuyor.</p>
+        <p>Pro pakete geçmek için iletişime geçin.</p>
+      </div>
+    )
+  }
+
+  console.log('[Admin] GUARD: canAdmin=true, dashboard gösteriliyor')
 
   return (
     <div className="admin-dashboard">

@@ -1,0 +1,71 @@
+import { createServerClient } from '@supabase/ssr'
+import { NextResponse, type NextRequest } from 'next/server'
+
+// /[locale]/admin/login hariç tüm admin rotaları koruma altında
+const ADMIN_PATTERN = /^\/(tr|en)\/admin(?!\/login)/
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  if (!ADMIN_PATTERN.test(pathname)) {
+    return NextResponse.next()
+  }
+
+  let supabaseResponse = NextResponse.next({ request })
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll()
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
+          )
+          supabaseResponse = NextResponse.next({ request })
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          )
+        },
+      },
+    }
+  )
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  const locale = pathname.split('/')[1]
+
+  if (!user) {
+    return NextResponse.redirect(
+      new URL(`/${locale}/admin/login`, request.url)
+    )
+  }
+
+  const slug = process.env.NEXT_PUBLIC_SALON_SLUG ?? 'test-salon'
+  const { data: salon } = await supabase
+    .from('salons')
+    .select('features, plan_expires_at')
+    .eq('slug', slug)
+    .single()
+
+  const expired =
+    salon?.plan_expires_at && new Date(salon.plan_expires_at) < new Date()
+  const canAccessAdmin = !expired && salon?.features?.admin_panel === true
+
+  if (!canAccessAdmin) {
+    return NextResponse.redirect(
+      new URL(`/${locale}/unauthorized`, request.url)
+    )
+  }
+
+  return supabaseResponse
+}
+
+export const config = {
+  matcher: ['/(tr|en)/admin/:path*'],
+}

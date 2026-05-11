@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef, FormEvent } from "react";
-import { X, Check, Loader2, ArrowRight, ChevronDown } from "lucide-react";
+import { X, Check, Loader2, ArrowRight, ChevronDown, MessageCircle } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useBooking } from "@/context/BookingContext";
+import { useFeature } from "@/hooks/useFeature";
 import Image from "next/image";
 
 /* ─────────────────────────────────────────────────────────
@@ -26,6 +27,7 @@ export default function AppointmentModal() {
   const t = useTranslations("modal");
   const locale = useLocale();
   const { isOpen, closeModal } = useBooking();
+  const { value: canBook } = useFeature('booking');
 
   const [step, setStep] = useState(1);
   const [visible, setVisible] = useState(false);
@@ -192,11 +194,13 @@ export default function AppointmentModal() {
           {/* Top Info */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "2rem" }}>
             <div>
-              <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--color-gold)", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "0.5rem" }}>
-                ADIM {step} / 3
-              </p>
+              {canBook && (
+                <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--color-gold)", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "0.5rem" }}>
+                  ADIM {step} / 3
+                </p>
+              )}
               <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "2rem", color: "var(--color-primary)", margin: 0, fontWeight: 400 }}>
-                {status === "success" ? "Teşekkürler" : "Randevu Oluştur"}
+                {status === "success" ? "Teşekkürler" : canBook ? "Randevu Oluştur" : "Teklif Talebi Oluştur"}
               </h2>
             </div>
             <button
@@ -207,7 +211,9 @@ export default function AppointmentModal() {
             </button>
           </div>
 
-          {status === "success" ? (
+          {!canBook ? (
+            <OfferForm closeModal={closeModal} />
+          ) : status === "success" ? (
              <SuccessContent closeModal={closeModal} />
           ) : (
             <>
@@ -517,6 +523,112 @@ export default function AppointmentModal() {
         }
       `}</style>
     </div>
+  );
+}
+
+const offerServices = [
+  "Saç Tasarımı",
+  "Cilt Bakımı",
+  "Makyaj",
+  "Tırnak",
+  "Kaş & Kirpik",
+  "Kalıcı Oje",
+];
+
+function OfferForm({ closeModal }: { closeModal: () => void }) {
+  const [form, setForm] = useState({ name: "", phone: "", service: "", preference: "", note: "" });
+  const [errors, setErrors] = useState<{ name?: string; phone?: string; service?: string }>({});
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const newErrors: typeof errors = {};
+    if (form.name.length < 2) newErrors.name = "İsim giriniz.";
+    if (form.phone.length < 10) newErrors.phone = "Geçerli telefon giriniz.";
+    if (!form.service) newErrors.service = "Hizmet seçiniz.";
+    if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
+
+    const number = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
+    const text = `Merhaba! Teklif almak istiyorum.\nİsim: ${form.name}\nHizmet: ${form.service}\nTercih: ${form.preference}\nNot: ${form.note}`;
+    window.open(`https://wa.me/${number}?text=${encodeURIComponent(text)}`, "_blank");
+    closeModal();
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <p style={{ fontSize: "1rem", color: "var(--color-charcoal-muted)", marginBottom: "2rem" }}>
+        Size özel teklif hazırlayalım. Formu doldurun, WhatsApp üzerinden iletişime geçelim.
+      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+            <label style={labelStyle}>İSİM SOYAD *</label>
+            <input
+              style={{ ...inputStyle, borderColor: errors.name ? "#ef4444" : "rgba(201,169,110,0.2)" }}
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              placeholder="Adınız"
+            />
+            {errors.name && <span style={{ fontSize: "0.75rem", color: "#ef4444" }}>{errors.name}</span>}
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+            <label style={labelStyle}>TELEFON *</label>
+            <input
+              style={{ ...inputStyle, borderColor: errors.phone ? "#ef4444" : "rgba(201,169,110,0.2)" }}
+              value={form.phone}
+              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+              placeholder="05XX XXX XX XX"
+            />
+            {errors.phone && <span style={{ fontSize: "0.75rem", color: "#ef4444" }}>{errors.phone}</span>}
+          </div>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+          <label style={labelStyle}>İLGİLENDİĞİN HİZMET *</label>
+          <select
+            style={{ ...inputStyle, borderColor: errors.service ? "#ef4444" : "rgba(201,169,110,0.2)", cursor: "pointer" }}
+            value={form.service}
+            onChange={(e) => setForm({ ...form, service: e.target.value })}
+          >
+            <option value="">Seçiniz...</option>
+            {offerServices.map((s) => <option key={s} value={s}>{s}</option>)}
+          </select>
+          {errors.service && <span style={{ fontSize: "0.75rem", color: "#ef4444" }}>{errors.service}</span>}
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+          <label style={labelStyle}>TERCİH ETTİĞİN GÜN / SAAT</label>
+          <input
+            style={inputStyle}
+            value={form.preference}
+            onChange={(e) => setForm({ ...form, preference: e.target.value })}
+            placeholder="Örn: Salı öğleden sonra"
+          />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+          <label style={labelStyle}>NOT (OPSİYONEL)</label>
+          <textarea
+            style={{ ...inputStyle, height: "80px", resize: "none", padding: "1rem" }}
+            value={form.note}
+            onChange={(e) => setForm({ ...form, note: e.target.value })}
+            placeholder="Eklemek istediğiniz bir not var mı?"
+          />
+        </div>
+      </div>
+      <div style={{ marginTop: "2.5rem", display: "flex", gap: "1rem", borderTop: "1px solid rgba(201,169,110,0.1)", paddingTop: "2rem" }}>
+        <button
+          type="button"
+          onClick={closeModal}
+          style={{ padding: "1rem 2rem", borderRadius: "999px", border: "1px solid var(--color-gold)", background: "transparent", color: "var(--color-primary)", fontWeight: 700, fontSize: "0.85rem", letterSpacing: "0.1em", cursor: "pointer" }}
+        >
+          VAZGEÇ
+        </button>
+        <button
+          type="submit"
+          style={{ flex: 1, padding: "1rem 2rem", borderRadius: "999px", background: "var(--color-gold)", color: "#fff", border: "none", fontWeight: 700, fontSize: "0.85rem", letterSpacing: "0.1em", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.75rem" }}
+        >
+          <MessageCircle size={18} />
+          WHATSAPP&apos;TAN GÖNDER
+        </button>
+      </div>
+    </form>
   );
 }
 
