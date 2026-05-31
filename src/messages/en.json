@@ -77,7 +77,9 @@
   },
   "gallery": {
     "eyebrow": "A Curated Collection",
-    "title": "The Portfolio of Elegance",
+    "title": "The Portfolio of",
+    "titleItalic": "Elegance",
+    "subtitle": "Moments from our studio and authentic results shared with our clients.",
     "items": [
       {
         "label": "Couture Nails"

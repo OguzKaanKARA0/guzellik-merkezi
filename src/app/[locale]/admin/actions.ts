@@ -16,7 +16,7 @@ import { redirect } from "next/navigation";
  
 
 
-export async function updateBookingStatus(id: string, newStatus: "approved" | "cancelled") {
+export async function updateBookingStatus(id: string, newStatus: "approved" | "confirmed" | "cancelled" | "completed") {
   console.log(`[admin-action] Durum güncelleniyor: ${id} -> ${newStatus}`);
   try {
     const supabaseAdmin = await createAdminClient();
@@ -109,7 +109,7 @@ export async function deleteLead(id: string) {
 export async function createManualBooking(data: {
   name: string;
   phone: string;
-  email?: string;
+  email?: string | null;
   service: string;
   date: string;
   time: string;
@@ -163,5 +163,26 @@ export async function createManualLead(data: {
 }
 
 export async function logout() {
+  const { createClient: createServerClient } = await import("@/utils/supabase/server");
+  const supabase = await createServerClient();
+  await supabase.auth.signOut();
   redirect("/");
+}
+
+/**
+ * Müşteri notunu kaydet / güncelle
+ * customer_notes tablosu: phone (PK), note, updated_at
+ * Tablo yoksa Supabase hata döner — migration gerekir.
+ */
+export async function saveCustomerNote(phone: string, note: string) {
+  const supabaseAdmin = await createAdminClient();
+  const { error } = await supabaseAdmin
+    .from("customer_notes")
+    .upsert({ phone, note, updated_at: new Date().toISOString() }, { onConflict: "phone" });
+
+  if (error) {
+    console.error("[admin-action] Müşteri notu kaydetme hatası:", error);
+    throw new Error(error.message);
+  }
+  return { success: true };
 }

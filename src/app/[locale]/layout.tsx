@@ -70,7 +70,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${inter.variable} ${playfair.variable} h-full`}>
+    <html lang={locale} className={`${inter.variable} ${playfair.variable} h-full`} data-scroll-behavior="smooth">
       <body className="min-h-full flex flex-col antialiased">
         <Providers locale={locale} messages={messages}>
           {children}

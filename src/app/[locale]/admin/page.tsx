@@ -2,8 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
 import { AdminDashboardClient } from "./AdminDashboardClient";
-import { LogOut, MessageCircle } from "lucide-react";
-import { logout } from "./actions";
+import { MessageCircle } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -95,37 +94,21 @@ export default async function AdminDashboardPage({ params }: { params: Promise<{
     .order("created_at", { ascending: false });
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "var(--color-bg)", padding: "3rem 1.5rem" }}>
+    <div style={{ padding: "2.5rem 1.5rem" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        
-        {/* Header */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "3rem", paddingBottom: "1.5rem", borderBottom: "1px solid rgba(212,175,55,0.2)" }}>
-          <div>
-            <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "2.5rem", color: "var(--color-primary)", margin: 0, fontWeight: 400 }}>
-              Luxe <span style={{ fontStyle: "italic", color: "var(--color-gold)" }}>Yönetim</span>
-            </h1>
-            <p style={{ color: "var(--color-charcoal-muted)", fontSize: "0.95rem", marginTop: "0.35rem" }}>
-              Tüm randevuları buradan yönetebilirsiniz. Hoş geldin, <strong style={{ color: "var(--color-primary)" }}>{user.email}</strong>.
-            </p>
-          </div>
-          
-          <form action={logout}>
-            <button 
-              type="submit" 
-              style={{ display: "flex", alignItems: "center", gap: "0.5rem", background: "transparent", border: "1px solid rgba(212,175,55,0.4)", padding: "0.75rem 1.5rem", borderRadius: "99px", color: "var(--color-charcoal)", cursor: "pointer", transition: "all 0.2s" }}
-            >
-              <LogOut size={16} style={{ color: "var(--color-gold)" }} />
-              <span style={{ fontSize: "0.85rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>Çıkış Yap</span>
-            </button>
-          </form>
+        <div style={{ marginBottom: "2rem" }}>
+          <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "2rem", color: "var(--color-primary)", margin: 0, fontWeight: 400 }}>
+            Luxe <span style={{ fontStyle: "italic", color: "var(--color-gold)" }}>Yönetim</span>
+          </h1>
+          <p style={{ color: "var(--color-charcoal-muted)", fontSize: "0.9rem", marginTop: "0.35rem" }}>
+            Hoş geldin, <strong style={{ color: "var(--color-primary)" }}>{user.email}</strong>
+          </p>
         </div>
 
-        {/* Dashboard Content (Client Component) */}
-        <AdminDashboardClient 
-          initialBookings={bookings || []} 
+        <AdminDashboardClient
+          initialBookings={bookings || []}
           initialLeads={leads || []}
         />
-
       </div>
     </div>
   );

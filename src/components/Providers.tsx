@@ -6,6 +6,7 @@ import AppointmentModal from "@/components/AppointmentModal";
 import ServiceDetailsModal from "@/components/ServiceDetailsModal";
 import OfferModal from "@/components/OfferModal";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { Toaster } from "@/components/ui/sonner";
 
 /**
  * Client-side provider tree:
@@ -30,6 +31,7 @@ export default function Providers({
         <ServiceDetailsModal />
         <OfferModal />
         <WhatsAppButton />
+        <Toaster />
         {children}
       </BookingProvider>
     </NextIntlClientProvider>

@@ -127,8 +127,8 @@ export default function ServiceDetailsModal() {
           <Image src={image} alt={title} fill style={{ objectFit: "cover" }} priority />
           {/* Mobile Nav Overlay */}
           <div className="mobile-nav-overlay" style={{ position: "absolute", bottom: "1rem", left: "50%", transform: "translateX(-50%)", display: "none", gap: "1rem" }}>
-             <button onClick={handlePrev} style={{ background: "rgba(0,0,0,0.5)", border: "none", color: "#fff", borderRadius: "50%", p: 2 }}><ChevronLeft size={20}/></button>
-             <button onClick={handleNext} style={{ background: "rgba(0,0,0,0.5)", border: "none", color: "#fff", borderRadius: "50%", p: 2 }}><ChevronRight size={20}/></button>
+             <button onClick={handlePrev} style={{ background: "rgba(0,0,0,0.5)", border: "none", color: "#fff", borderRadius: "50%", padding: "0.5rem" }}><ChevronLeft size={20}/></button>
+             <button onClick={handleNext} style={{ background: "rgba(0,0,0,0.5)", border: "none", color: "#fff", borderRadius: "50%", padding: "0.5rem" }}><ChevronRight size={20}/></button>
           </div>
         </div>
 
